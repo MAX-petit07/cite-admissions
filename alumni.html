@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask an alumni — Cité Admissions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER (same as the other pages) ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <!-- Simple placeholder icon (not the official CIUP logo) -->
+        <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
+          <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
+          <path d="M24 15v29" />
+          <path d="M4 44h40" />
+        </svg>
+        <span class="logo__text">
+          <strong>Cité Admissions</strong>
+          <small>A guide to applying to CIUP</small>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="index.html#guide" class="nav__link">Apply</a>
+        <a href="maisons.html" class="nav__link">Maisons</a>
+        <a href="index.html#eligibility" class="nav__link">Eligibility</a>
+        <a href="alumni.html" class="nav__link is-active">Alumni</a>
+        <a href="index.html#faq" class="nav__link">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <select class="lang" aria-label="Language">
+          <option>EN</option>
+          <option>FR</option>
+          <option>ES</option>
+        </select>
+        <a href="index.html#guide" class="btn btn--ghost">Apply Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 1. HERO ============ -->
+  <section class="hero hero--page">
+    <div class="container hero__content">
+      <h1>Talk to someone who's been there</h1>
+      <p>Ask former CIUP residents about applying, choosing a house and life at the Cité.</p>
+      <a href="#directory" class="btn btn--mint">Find an alumni</a>
+    </div>
+  </section>
+
+  <main class="container alumni-page">
+
+    <!-- Honesty note: alumni are not official -->
+    <div class="notice" role="note">
+      <strong>Alumni share their own experience.</strong>
+      For official rules, dates and decisions, always check
+      <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>.
+    </div>
+
+    <!-- ============ 2. HOW IT WORKS ============ -->
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="section__head">
+        <h2 id="how-title">How it works</h2>
+      </div>
+      <ol class="how">
+        <li class="how__step card">
+          <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M16 5.5a3 3 0 0 1 0 5.5M18 14.5c1.8.8 3 2.6 3 5.5"/></svg></span>
+          <h3><span class="how__num">1</span> Pick an alumni</h3>
+          <p>Browse the profiles and filter by topic or language.</p>
+        </li>
+        <li class="how__step card">
+          <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span>
+          <h3><span class="how__num">2</span> Send your question</h3>
+          <p>Write a short, specific question (500 characters maximum).</p>
+        </li>
+        <li class="how__step card">
+          <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+          <h3><span class="how__num">3</span> They reply by email</h3>
+          <p>Alumni are volunteers, so replies can take a few days.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ 3. DIRECTORY ============ -->
+    <section class="section" id="directory" aria-labelledby="dir-title">
+      <div class="section__head">
+        <h2 id="dir-title">Alumni directory</h2>
+        <p><strong>Example profiles.</strong> Real volunteers will be added with their consent.</p>
+      </div>
+
+      <!-- Filters: pick one topic and/or one language. Both filters are applied together. -->
+      <div class="filters">
+        <div class="filter-group" role="group" aria-label="Filter by topic">
+          <span class="filter-group__label">Topic</span>
+          <button type="button" class="chip filter-chip" data-group="topic" data-value="Applying" aria-pressed="false">Applying</button>
+          <button type="button" class="chip filter-chip" data-group="topic" data-value="Choosing a house" aria-pressed="false">Choosing a house</button>
+          <button type="button" class="chip filter-chip" data-group="topic" data-value="Documents" aria-pressed="false">Documents</button>
+          <button type="button" class="chip filter-chip" data-group="topic" data-value="Life at the Cité" aria-pressed="false">Life at the Cité</button>
+          <button type="button" class="chip filter-chip" data-group="topic" data-value="Arriving in Paris" aria-pressed="false">Arriving in Paris</button>
+        </div>
+        <div class="filter-group" role="group" aria-label="Filter by language">
+          <span class="filter-group__label">Language</span>
+          <button type="button" class="chip filter-chip" data-group="lang" data-value="English" aria-pressed="false">English</button>
+          <button type="button" class="chip filter-chip" data-group="lang" data-value="French" aria-pressed="false">French</button>
+          <button type="button" class="chip filter-chip" data-group="lang" data-value="Spanish" aria-pressed="false">Spanish</button>
+          <button type="button" class="chip filter-chip" data-group="lang" data-value="Other" aria-pressed="false">Other</button>
+        </div>
+        <p class="filters__status">
+          <span id="alumniCount" aria-live="polite">Showing 6 alumni</span>
+          <button type="button" class="linkbtn" id="clearFilters" hidden>Clear filters</button>
+        </p>
+      </div>
+
+      <!-- 6 example cards. data-topics / data-langs are what the filters read. -->
+      <div class="alumni-grid" id="alumniGrid">
+
+        <article class="alumni-card" data-topics="Applying|Documents" data-langs="English|French">
+          <div class="alumni-card__top">
+            <span class="avatar" aria-hidden="true">A1</span>
+            <div>
+              <h3>Alumni volunteer 1</h3>
+              <span class="label label--tips">Example profile</span>
+            </div>
+          </div>
+          <ul class="facts">
+            <li>Study field: Engineering (example)</li>
+            <li>Resident 20XX–20XX</li>
+            <li>House: to be added</li>
+            <li>Languages: English, French</li>
+          </ul>
+          <div class="can-help">
+            <span class="can-help__label">Can help with</span>
+            <ul class="tags"><li>Applying</li><li>Documents</li></ul>
+          </div>
+          <button type="button" class="btn btn--light" data-open="ask" data-alumni="Alumni volunteer 1">Ask a question</button>
+        </article>
+
+        <article class="alumni-card" data-topics="Choosing a house|Life at the Cité" data-langs="English|Spanish">
+          <div class="alumni-card__top">
+            <span class="avatar" aria-hidden="true">A2</span>
+            <div>
+              <h3>Alumni volunteer 2</h3>
+              <span class="label label--tips">Example profile</span>
+            </div>
+          </div>
+          <ul class="facts">
+            <li>Study field: Business (example)</li>
+            <li>Resident 20XX–20XX</li>
+            <li>House: to be added</li>
+            <li>Languages: English, Spanish</li>
+          </ul>
+          <div class="can-help">
+            <span class="can-help__label">Can help with</span>
+            <ul class="tags"><li>Choosing a house</li><li>Life at the Cité</li></ul>
+          </div>
+          <button type="button" class="btn btn--light" data-open="ask" data-alumni="Alumni volunteer 2">Ask a question</button>
+        </article>
+
+        <article class="alumni-card" data-topics="Life at the Cité|Arriving in Paris" data-langs="French">
+          <div class="alumni-card__top">
+            <span class="avatar" aria-hidden="true">A3</span>
+            <div>
+              <h3>Alumni volunteer 3</h3>
+              <span class="label label--tips">Example profile</span>
+            </div>
+          </div>
+          <ul class="facts">
+            <li>Study field: Humanities (example)</li>
+            <li>Resident 20XX–20XX</li>
+            <li>House: to be added</li>
+            <li>Languages: French</li>
+          </ul>
+          <div class="can-help">
+            <span class="can-help__label">Can help with</span>
+            <ul class="tags"><li>Life at the Cité</li><li>Arriving in Paris</li></ul>
+          </div>
+          <button type="button" class="btn btn--light" data-open="ask" data-alumni="Alumni volunteer 3">Ask a question</button>
+        </article>
+
+        <article class="alumni-card" data-topics="Applying|Documents|Arriving in Paris" data-langs="English|Other">
+          <div class="alumni-card__top">
+            <span class="avatar" aria-hidden="true">A4</span>
+            <div>
+              <h3>Alumni volunteer 4</h3>
+              <span class="label label--tips">Example profile</span>
+            </div>
+          </div>
+          <ul class="facts">
+            <li>Study field: Sciences (example)</li>
+            <li>Resident 20XX–20XX</li>
+            <li>House: to be added</li>
+            <li>Languages: English, other</li>
+          </ul>
+          <div class="can-help">
+            <span class="can-help__label">Can help with</span>
+            <ul class="tags"><li>Applying</li><li>Documents</li><li>Arriving in Paris</li></ul>
+          </div>
+          <button type="button" class="btn btn--light" data-open="ask" data-alumni="Alumni volunteer 4">Ask a question</button>
+        </article>
+
+        <article class="alumni-card" data-topics="Applying|Choosing a house" data-langs="English|French|Spanish">
+          <div class="alumni-card__top">
+            <span class="avatar" aria-hidden="true">A5</span>
+            <div>
+              <h3>Alumni volunteer 5</h3>
+              <span class="label label--tips">Example profile</span>
+            </div>
+          </div>
+          <ul class="facts">
+            <li>Study field: Law (example)</li>
+            <li>Resident 20XX–20XX</li>
+            <li>House: to be added</li>
+            <li>Languages: English, French, Spanish</li>
+          </ul>
+          <div class="can-help">
+            <span class="can-help__label">Can help with</span>
+            <ul class="tags"><li>Applying</li><li>Choosing a house</li></ul>
+          </div>
+          <button type="button" class="btn btn--light" data-open="ask" data-alumni="Alumni volunteer 5">Ask a question</button>
+        </article>
+
+        <article class="alumni-card" data-topics="Choosing a house|Life at the Cité|Arriving in Paris" data-langs="Spanish|Other">
+          <div class="alumni-card__top">
+            <span class="avatar" aria-hidden="true">A6</span>
+            <div>
+              <h3>Alumni volunteer 6</h3>
+              <span class="label label--tips">Example profile</span>
+            </div>
+          </div>
+          <ul class="facts">
+            <li>Study field: Arts (example)</li>
+            <li>Resident 20XX–20XX</li>
+            <li>House: to be added</li>
+            <li>Languages: Spanish, other</li>
+          </ul>
+          <div class="can-help">
+            <span class="can-help__label">Can help with</span>
+            <ul class="tags"><li>Choosing a house</li><li>Life at the Cité</li><li>Arriving in Paris</li></ul>
+          </div>
+          <button type="button" class="btn btn--light" data-open="ask" data-alumni="Alumni volunteer 6">Ask a question</button>
+        </article>
+
+      </div>
+      <p class="muted" id="alumniEmpty" hidden>No alumni match these filters. Try removing one of them.</p>
+    </section>
+
+    <!-- ============ 5. BECOME A VOLUNTEER ============ -->
+    <section class="section" id="volunteer" aria-labelledby="vol-title">
+      <div class="card volunteer">
+        <div>
+          <h2 id="vol-title">Become an alumni volunteer</h2>
+          <p>Lived at the Cité? Share your experience with students who are about to apply. You choose what is shown, and you answer when you have time.</p>
+        </div>
+        <button type="button" class="btn btn--dark" data-open="volunteer">Become a volunteer</button>
+      </div>
+    </section>
+
+    <!-- ============ 6. COMMUNITY RULES ============ -->
+    <section class="section" id="rules" aria-labelledby="rules-title">
+      <div class="card rules-card">
+        <h2 id="rules-title">Community rules</h2>
+        <p class="rules-card__intro">For everyone: students and alumni.</p>
+        <ul class="rules">
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span>
+            <p>Be kind and respectful. Everyone was new once.</p>
+          </li>
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+            <p>Alumni share experience, not official decisions. Always check <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>.</p>
+          </li>
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9.5c0-1 1-1.5 3-1.5s3 .7 3 1.7-1 1.5-3 2-3 1-3 2 1 1.7 3 1.7 3-.6 3-1.6M5.6 5.6l12.8 12.8"/></svg></span>
+            <p>Never send money to anyone you meet here.</p>
+          </li>
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg></span>
+            <p>Never share your passport, ID or application documents with an alumni.</p>
+          </li>
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></svg></span>
+            <p>No room sales, sublets or "guaranteed places". Admission only happens through CIUP's official channels.</p>
+          </li>
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+            <p>Keep personal contact details private until you're comfortable.</p>
+          </li>
+          <li>
+            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span>
+            <p>Report anything suspicious: <a href="mailto:team@example.com">Report a problem</a> <span class="muted">(placeholder contact, to be replaced by our team's real address)</span></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 7. HELP / FAQ (accordion) ============ -->
+    <section class="section" id="help" aria-labelledby="help-title">
+      <div class="section__head">
+        <h2 id="help-title">Help</h2>
+      </div>
+      <div class="faq">
+        <details name="faq">
+          <summary>Can an alumni help me get accepted?</summary>
+          <p>No. Admission is decided by CIUP. Alumni can only share their experience.</p>
+        </details>
+        <details name="faq">
+          <summary>Is this an official CIUP service?</summary>
+          <p>No, it's a student prototype, not affiliated with CIUP.</p>
+        </details>
+        <details name="faq">
+          <summary>How fast will they answer?</summary>
+          <p>Alumni are volunteers, so replies can take a few days.</p>
+        </details>
+        <details name="faq">
+          <summary>What if I have an official question?</summary>
+          <p>Contact CIUP: <a href="mailto:admissions.etudiants@ciup.fr">admissions.etudiants@ciup.fr</a> or <a href="https://www.ciup.fr/contact/" target="_blank" rel="noopener">www.ciup.fr/contact</a>.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER (same as the other pages) ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <!-- Official information area: the logo file goes in images/ciup-logo.png -->
+      <div class="official">
+        <a class="official__logo" href="https://www.ciup.fr" target="_blank" rel="noopener" aria-label="Cité internationale universitaire de Paris, official website">
+          <img src="images/ciup-logo.png" alt="Cité internationale universitaire de Paris" onerror="this.replaceWith(document.createTextNode('ciup.fr'))" />
+        </a>
+        <p class="official__text"><strong>Official information:</strong> Cité internationale universitaire de Paris</p>
+      </div>
+      <p class="footer__disclaimer">Cité Admissions is a student prototype and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+    </div>
+  </footer>
+
+  <!-- ============ PANEL 1: ASK A QUESTION ============ -->
+  <!-- A <dialog> is a panel inside the page (not a browser popup). Escape closes it. -->
+  <dialog id="askDialog" aria-labelledby="askTitle">
+    <div class="panel">
+      <div class="panel__head">
+        <h2 id="askTitle">Ask a question</h2>
+        <button type="button" class="panel__close" data-close aria-label="Close">✕</button>
+      </div>
+      <p class="panel__note">To: <strong id="askWho">an alumni</strong> (example profile). In this prototype nothing is sent.</p>
+
+      <form id="askForm2" class="form" novalidate>
+        <div class="field" data-rule="text" data-error-empty="Please enter your first name.">
+          <label for="askName">First name</label>
+          <input type="text" id="askName" autocomplete="given-name" aria-describedby="askName-err" />
+          <p class="field__error" id="askName-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="email" data-error-empty="Please enter your email address." data-error-invalid="This email doesn't look right. Example: name@example.com">
+          <label for="askEmail">Your email</label>
+          <input type="email" id="askEmail" autocomplete="email" aria-describedby="askEmail-err" />
+          <p class="field__error" id="askEmail-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="text" data-error-empty="Please choose a topic.">
+          <label for="askTopic">Topic</label>
+          <select id="askTopic" aria-describedby="askTopic-err">
+            <option value="">Choose a topic…</option>
+            <option>Applying</option>
+            <option>Choosing a house</option>
+            <option>Documents</option>
+            <option>Life at the Cité</option>
+            <option>Arriving in Paris</option>
+          </select>
+          <p class="field__error" id="askTopic-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="text" data-error-empty="Please write your question.">
+          <label for="askQuestion">Your question</label>
+          <textarea id="askQuestion" rows="5" maxlength="500" aria-describedby="askQuestion-err askCount"></textarea>
+          <p class="counter" id="askCount">0 / 500</p>
+          <p class="field__error" id="askQuestion-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="checkbox" data-error-empty="Please tick the box to continue.">
+          <label class="check" for="askRules">
+            <input type="checkbox" id="askRules" aria-describedby="askRules-err" />
+            <span>I've read the <a href="#rules" data-to-rules>community rules</a></span>
+          </label>
+          <p class="field__error" id="askRules-err" hidden></p>
+        </div>
+
+        <div class="panel__actions">
+          <button type="submit" class="btn btn--dark">Send question</button>
+          <button type="button" class="btn btn--light" data-close>Cancel</button>
+        </div>
+      </form>
+
+      <div class="done" hidden tabindex="-1">
+        <p><strong>Thanks!</strong> This is a prototype, so your question wasn't sent. In the real version, the alumni would reply by email.</p>
+        <button type="button" class="btn btn--dark" data-close>Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ PANEL 2: BECOME A VOLUNTEER ============ -->
+  <dialog id="volDialog" aria-labelledby="volTitle">
+    <div class="panel">
+      <div class="panel__head">
+        <h2 id="volTitle">Become an alumni volunteer</h2>
+        <button type="button" class="panel__close" data-close aria-label="Close">✕</button>
+      </div>
+      <p class="panel__note">Prototype: nothing you type here is sent or saved.</p>
+
+      <form id="volForm" class="form" novalidate>
+        <div class="field" data-rule="text" data-error-empty="Please enter your first name.">
+          <label for="volName">First name</label>
+          <input type="text" id="volName" autocomplete="given-name" aria-describedby="volName-err" />
+          <p class="field__error" id="volName-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="email" data-error-empty="Please enter your email address." data-error-invalid="This email doesn't look right. Example: name@example.com">
+          <label for="volEmail">Your email</label>
+          <input type="email" id="volEmail" autocomplete="email" aria-describedby="volEmail-err" />
+          <p class="field__error" id="volEmail-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="text" data-error-empty="Please enter your study field.">
+          <label for="volField">Study field</label>
+          <input type="text" id="volField" aria-describedby="volField-err" />
+          <p class="field__error" id="volField-err" hidden></p>
+        </div>
+
+        <div class="field" data-rule="text" data-error-empty="Please enter the years you lived at the Cité.">
+          <label for="volYears">Years at the Cité</label>
+          <input type="text" id="volYears" aria-describedby="volYears-err" />
+          <p class="field__error" id="volYears-err" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="volHouse">House <span class="muted">(optional)</span></label>
+          <input type="text" id="volHouse" />
+        </div>
+
+        <fieldset class="field" data-rule="group" data-error-empty="Please choose at least one language.">
+          <legend>Languages you can answer in</legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="lang" value="English" /> <span>English</span></label>
+            <label class="check"><input type="checkbox" name="lang" value="French" /> <span>French</span></label>
+            <label class="check"><input type="checkbox" name="lang" value="Spanish" /> <span>Spanish</span></label>
+            <label class="check"><input type="checkbox" name="lang" value="Other" /> <span>Other</span></label>
+          </div>
+          <p class="field__error" hidden></p>
+        </fieldset>
+
+        <fieldset class="field" data-rule="group" data-error-empty="Please choose at least one topic.">
+          <legend>Topics you can help with</legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="topic" value="Applying" /> <span>Applying</span></label>
+            <label class="check"><input type="checkbox" name="topic" value="Choosing a house" /> <span>Choosing a house</span></label>
+            <label class="check"><input type="checkbox" name="topic" value="Documents" /> <span>Documents</span></label>
+            <label class="check"><input type="checkbox" name="topic" value="Life at the Cité" /> <span>Life at the Cité</span></label>
+            <label class="check"><input type="checkbox" name="topic" value="Arriving in Paris" /> <span>Arriving in Paris</span></label>
+          </div>
+          <p class="field__error" hidden></p>
+        </fieldset>
+
+        <div class="field" data-rule="checkbox" data-error-empty="Please tick the box to continue.">
+          <label class="check" for="volConsent">
+            <input type="checkbox" id="volConsent" aria-describedby="volConsent-err" />
+            <span>I agree that my first name, study field, house and languages are shown on this page.</span>
+          </label>
+          <p class="field__error" id="volConsent-err" hidden></p>
+        </div>
+
+        <div class="panel__actions">
+          <button type="submit" class="btn btn--dark">Send</button>
+          <button type="button" class="btn btn--light" data-close>Cancel</button>
+        </div>
+      </form>
+
+      <div class="done" hidden tabindex="-1">
+        <p><strong>Thanks!</strong> This is a prototype, so your details weren't sent or saved. In the real version, we would reply by email.</p>
+        <button type="button" class="btn btn--dark" data-close>Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+  <script src="alumni.js"></script>
+</body>
+</html>
