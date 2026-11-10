@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maisons — Cité Admissions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER (same as homepage; links point back to index.html) ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <!-- Simple placeholder icon (not the official CIUP logo) -->
+        <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
+          <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
+          <path d="M24 15v29" />
+          <path d="M4 44h40" />
+        </svg>
+        <span class="logo__text">
+          <strong>Cité Admissions</strong>
+          <small>A guide to applying to CIUP</small>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="index.html#guide" class="nav__link">Apply</a>
+        <a href="maisons.html" class="nav__link is-active">Maisons</a>
+        <a href="index.html#eligibility" class="nav__link">Eligibility</a>
+        <a href="index.html#faq" class="nav__link">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <select class="lang" aria-label="Language">
+          <option>EN</option>
+          <option>FR</option>
+          <option>ES</option>
+        </select>
+        <a href="index.html#guide" class="btn btn--dark">Apply Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PAGE TITLE BANNER ============ -->
+  <section class="hero hero--small">
+    <div class="container hero__content">
+      <h1>Explore the Maisons</h1>
+      <p>All the houses listed on the official CIUP website.</p>
+    </div>
+  </section>
+
+  <main class="container maisons-page">
+
+    <!-- Source note: facts come from ciup-verified-info.md (checked on ciup.fr, 10 Nov 2026) -->
+    <div class="notice notice--ok" role="note">
+      <strong>Source:</strong> the list of houses comes from
+      <a href="https://www.ciup.fr/maisons-liste/" target="_blank" rel="noopener">ciup.fr/maisons-liste</a>
+      (checked on 10 November 2026). The list page gives no description or eligibility for each house,
+      so please open a house's official page for its own conditions. ciup.fr mentions 47 houses in some places
+      and lists 48 here, so the number may differ.
+    </div>
+
+    <!-- Search box: script.js hides the cards that don't match -->
+    <div class="search">
+      <label for="maisonSearch" class="search__label">Search by name</label>
+      <input type="search" id="maisonSearch" placeholder="e.g. Japon, Fondation, Collège…" autocomplete="off" />
+      <p class="search__count" id="maisonCount" aria-live="polite">Showing 48 of 48 houses</p>
+    </div>
+
+    <!-- 48 cards, generated from section 10 of ciup-verified-info.md -->
+    <div class="maison-grid" id="maisonGrid">
+      <article class="maison-card" data-name="Fondation Rosa Abreu de Grancher">
+        <h3>Fondation Rosa Abreu de Grancher</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-rosa-abreu-de-grancher/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de l&#x27;Argentine">
+        <h3>Maison de l&#x27;Argentine</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-argentine/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison internationale AgroParisTech">
+        <h3>Maison internationale AgroParisTech</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-internationale-agroparistech/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des étudiants arméniens">
+        <h3>Maison des étudiants arméniens</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-etudiants-armeniens/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des élèves ingénieurs Arts et Métiers">
+        <h3>Maison des élèves ingénieurs Arts et Métiers</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-eleves-ingenieurs-des-arts-et-metiers/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des étudiants de l&#x27;Asie du Sud-Est">
+        <h3>Maison des étudiants de l&#x27;Asie du Sud-Est</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-etudiants-de-lasie-du-sud-est/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation Avicenne">
+        <h3>Fondation Avicenne</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-avicenne/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation Biermans-Lapôtre">
+        <h3>Fondation Biermans-Lapôtre</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-biermans-lapotre/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Brésil">
+        <h3>Maison du Brésil</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-bresil/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Cambodge">
+        <h3>Maison du Cambodge</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-cambodge/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des étudiants canadiens">
+        <h3>Maison des étudiants canadiens</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-etudiants-canadiens/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des étudiants chinois">
+        <h3>Maison des étudiants chinois</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-etudiants-chinois/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de la Corée">
+        <h3>Maison de la Corée</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-de-la-coree/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation danoise">
+        <h3>Fondation danoise</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-danoise/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Résidence Julie-Victoire Daubié">
+        <h3>Résidence Julie-Victoire Daubié</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/residence-julie-victoire-daubie/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation Deutsch de la Meurthe">
+        <h3>Fondation Deutsch de la Meurthe</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-emile-et-louise-deutsch-de-la-meurthe/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison d&#x27;Égypte">
+        <h3>Maison d&#x27;Égypte</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-degypte/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Collège d&#x27;Espagne">
+        <h3>Collège d&#x27;Espagne</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/college-despagne/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation des États-Unis">
+        <h3>Fondation des États-Unis</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-des-etats-unis/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Collège franco-britannique">
+        <h3>Collège franco-britannique</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/college-franco-britannique/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des étudiants de la Francophonie">
+        <h3>Maison des étudiants de la Francophonie</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-etudiants-de-la-francophonie/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Résidence Robert Garric">
+        <h3>Résidence Robert Garric</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/residence-robert-garric/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation Haraucourt">
+        <h3>Fondation Haraucourt</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-haraucourt/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison Heinrich Heine – Fondation de l&#x27;Allemagne">
+        <h3>Maison Heinrich Heine – Fondation de l&#x27;Allemagne</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-heinrich-heine-fondation-de-lallemagne/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation hellénique">
+        <h3>Fondation hellénique</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-hellenique/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Résidence André Honnorat">
+        <h3>Résidence André Honnorat</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/residence-andre-honnorat/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de l&#x27;Île-de-France">
+        <h3>Maison de l&#x27;Île-de-France</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-de-lile-de-france/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de l&#x27;Inde">
+        <h3>Maison de l&#x27;Inde</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-inde/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des industries agricoles et alimentaires">
+        <h3>Maison des industries agricoles et alimentaires</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-industries-agricoles-et-alimentaires/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison internationale">
+        <h3>Maison internationale</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-internationale/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de l&#x27;Italie">
+        <h3>Maison de l&#x27;Italie</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-de-litalie/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Japon">
+        <h3>Maison du Japon</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-japon/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Liban">
+        <h3>Maison du Liban</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-liban/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Résidence LILA">
+        <h3>Résidence LILA</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/residence-lila/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation Victor Lyon">
+        <h3>Fondation Victor Lyon</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-victor-lyon/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Maroc">
+        <h3>Maison du Maroc</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-maroc/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Mexique">
+        <h3>Maison du Mexique</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-mexique/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation de Monaco">
+        <h3>Fondation de Monaco</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-de-monaco/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Collège néerlandais">
+        <h3>Collège néerlandais</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/college-neerlandais/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de Norvège">
+        <h3>Maison de Norvège</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-de-norvege/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation Lucien Paye">
+        <h3>Fondation Lucien Paye</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-lucien-paye/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison du Portugal – André de Gouveia">
+        <h3>Maison du Portugal – André de Gouveia</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-du-portugal-andre-de-gouveia/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des Provinces de France">
+        <h3>Maison des Provinces de France</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-provinces-de-france/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison des étudiants suédois">
+        <h3>Maison des étudiants suédois</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-des-etudiants-suedois/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Fondation suisse">
+        <h3>Fondation suisse</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/fondation-suisse/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de Tunisie">
+        <h3>Maison de Tunisie</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-tunisie/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Pavillon Habib Bourguiba">
+        <h3>Pavillon Habib Bourguiba</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/pavillon-bourguiba/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+      <article class="maison-card" data-name="Maison de l&#x27;Ukraine">
+        <h3>Maison de l&#x27;Ukraine</h3>
+        <p class="maison-card__elig">Eligibility: check the official page</p>
+        <a class="maison-card__link" href="https://www.ciup.fr/maisons/maison-de-lukraine/" target="_blank" rel="noopener">Official page on ciup.fr →</a>
+      </article>
+    </div>
+    <p class="muted" id="maisonEmpty" hidden>No house matches your search.</p>
+  </main>
+
+  <!-- ============ FOOTER (same as homepage) ============ -->
+  <footer class="footer container">
+    <p>Cité Admissions is a student prototype and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+  </footer>
+
+  <!-- Same script: it opens the phone menu (the other parts only run on the homepage) -->
+  <script src="script.js"></script>
+</body>
+</html>

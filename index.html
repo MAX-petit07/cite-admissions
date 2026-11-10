@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cité Admissions — Your guide to living at CIUP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">
+        <!-- Simple placeholder icon (not the official CIUP logo) -->
+        <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
+          <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
+          <path d="M24 15v29" />
+          <path d="M4 44h40" />
+        </svg>
+        <span class="logo__text">
+          <strong>Cité Admissions</strong>
+          <small>A guide to applying to CIUP</small>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#" class="nav__link is-active">Home</a>
+        <a href="#guide" class="nav__link">Apply</a>
+        <a href="maisons.html" class="nav__link">Maisons</a>
+        <a href="#eligibility" class="nav__link">Eligibility</a>
+        <a href="#faq" class="nav__link">FAQ</a>
+      </nav>
+
+      <div class="header__actions">
+        <select class="lang" aria-label="Language">
+          <option>EN</option>
+          <option>FR</option>
+          <option>ES</option>
+        </select>
+        <a href="#guide" class="btn btn--dark">Apply Now</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero__content">
+      <h1>Your guide to living at CIUP</h1>
+
+      <p>A simple, clear and personalised way to apply to the<br />Cité Internationale Universitaire de Paris.</p>
+      <div class="hero__buttons">
+        <a href="#eligibility" class="btn btn--white">Check if you're eligible <span aria-hidden="true">→</span></a>
+        <a href="maisons.html" class="btn btn--outline">Explore the Maisons</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURE CARDS ============ -->
+  <section class="container">
+    <div class="features">
+      <a href="#eligibility" class="feature feature--active" id="eligibility">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="16" height="16" rx="2"/><path d="m8 12 3 3 8-9"/></svg>
+        <h3>Eligibility Checker</h3>
+        <p>See if you can apply</p>
+      </a>
+      <a href="#guide" class="feature">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></svg>
+        <h3>Application Guide</h3>
+        <p>Step-by-step guidance</p>
+      </a>
+      <a href="maisons.html" class="feature">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/></svg>
+        <h3>Explore the Maisons</h3>
+        <p>Find the right residence for you</p>
+      </a>
+      <a href="#assistant" class="feature">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg>
+        <h3>AI Assistant</h3>
+        <p>Get quick answers about CIUP</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ MAIN GRID ============ -->
+  <main class="container main-grid">
+
+    <!-- Timeline -->
+    <section class="card timeline-card" id="guide">
+      <div class="card__head">
+        <svg class="icon icon--lg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg>
+        <div>
+          <h2>Your application timeline</h2>
+          <p class="muted">A personalised timeline based on your profile and intake.</p>
+        </div>
+      </div>
+
+      <!-- Rules below come from ciup-verified-info.md (sections 4, 5 and 6), checked on ciup.fr -->
+      <ol class="timeline" id="timeline">
+        <li class="step" data-id="eligibility">
+          <button class="step__dot" aria-label="Mark as done"></button>
+          <div class="step__text">
+            <h4>Check your eligibility</h4>
+            <span class="step__date">Start here</span>
+          </div>
+          <span class="step__check" aria-hidden="true">✓</span>
+        </li>
+        <li class="step" data-id="documents">
+          <button class="step__dot" aria-label="Mark as done"></button>
+          <div class="step__text">
+            <h4>Prepare your documents</h4>
+            <span class="step__date">Passport or ID card copy + ID photo</span>
+          </div>
+          <span class="step__check" aria-hidden="true">✓</span>
+        </li>
+        <li class="step" data-id="submit">
+          <button class="step__dot" aria-label="Mark as done"></button>
+          <div class="step__text">
+            <h4>Submit your application</h4>
+            <span class="step__date">No deadline · for September, apply in April</span>
+          </div>
+          <span class="step__check" aria-hidden="true">✓</span>
+        </li>
+        <li class="step" data-id="response">
+          <button class="step__dot" aria-label="Mark as done"></button>
+          <div class="step__text">
+            <h4>Receive a response</h4>
+            <span class="step__date">No offer 15 days before arrival = not accepted</span>
+          </div>
+          <span class="step__check" aria-hidden="true">✓</span>
+        </li>
+        <li class="step" data-id="move">
+          <button class="step__dot" aria-label="Mark as done"></button>
+          <div class="step__text">
+            <h4>Move in to CIUP</h4>
+            <span class="step__date">Depends on your intake</span>
+          </div>
+          <span class="step__check" aria-hidden="true">✓</span>
+        </li>
+      </ol>
+      <p class="note">CIUP accepts new residents all year. For a September arrival, the French page says to apply from April and the English page says to complete your request in April, so check with CIUP before relying on this. The result is sent by email. Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>.</p>
+      <p class="note">Click a circle to tick off a step. Your progress is saved in this browser only. It doesn't track your real application with CIUP.</p>
+    </section>
+
+    <!-- Right column -->
+    <div class="right-col">
+
+      <section class="card">
+        <h2>Your application at a glance</h2>
+        <ol class="glance" id="glance">
+          <li><span class="num">1</span>Check your eligibility</li>
+          <li><span class="num">2</span>Choose a Maison</li>
+          <li><span class="num">3</span>Prepare your documents</li>
+          <li><span class="num">4</span>Submit your application</li>
+          <li><span class="num">5</span>Get your result</li>
+        </ol>
+      </section>
+
+      <section class="card assistant" id="assistant">
+        <div class="assistant__head">
+          <svg class="icon icon--xl" viewBox="0 0 24 24"><path d="M3 4h13v9H8l-5 4z"/><path d="M8 17v1h9l4 3V9h-5"/><path d="M7 8.5h.01M10 8.5h.01M13 8.5h.01"/></svg>
+          <div>
+            <h2>Ask our AI Assistant <span class="sparkle">✨</span></h2>
+            <p class="muted">Have a question about the application, eligibility or life at CIUP?<br />Tap a suggestion for an answer based on ciup.fr. Free typing isn't connected yet.</p>
+          </div>
+        </div>
+
+        <div id="chatLog" class="chat-log" aria-live="polite"></div>
+
+        <form class="ask" id="askForm">
+          <input type="text" id="askInput" placeholder="Ask a question..." autocomplete="off" />
+          <button type="submit" class="ask__send" aria-label="Send">
+            <svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
+          </button>
+        </form>
+
+        <div class="chips">
+          <button class="chip" data-key="criteria">What are the admission criteria?</button>
+          <button class="chip" data-key="response">When will I get a response?</button>
+          <button class="chip" data-key="maison">Which Maison is right for me?</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer container" id="faq">
+    <p>Cité Admissions is a student prototype and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
