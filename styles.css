@@ -142,7 +142,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* ===== Main grid ===== */
 .main-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px;
   margin-top: 64px; align-items: start;
 }
 
@@ -154,6 +154,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .card h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -.01em; }
 .card__head { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 24px; }
 .card__head p { margin-top: 4px; }
+
+.right-col { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
 
 /* ===== Timeline ===== */
 .timeline { list-style: none; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
@@ -194,6 +196,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .step.is-current .step__dot { border: 8px solid var(--midnight); }
 
 .note { font-size: .9rem; color: var(--muted); margin-top: 16px; }
+.note--box { background: var(--mint-tint); border-radius: 12px; padding: 14px 18px; }
 .note a, .notice a { text-decoration: underline; }
 
 /* ===== AI assistant ===== */
@@ -231,6 +234,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .chip:hover { background: var(--mint-tint); transform: translateY(-1px); }
 
+/* ===== Plan B card ===== */
+.planb h2 { margin-bottom: 20px; }
+.planb__block { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.planb__block p { font-size: .95rem; }
+.planb__block + .planb__block { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+.planb a { color: var(--green); font-weight: 700; text-decoration: underline; }
+.label {
+  display: inline-block; border-radius: var(--pill); padding: 2px 14px;
+  font-size: .8rem; font-weight: 700; letter-spacing: .02em;
+}
+.label--official { background: var(--midnight); color: var(--on-dark); }
+.label--tips { background: var(--card); color: var(--heading); border: 1px solid var(--muted); }
+.planb__tips { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: .95rem; }
+.planb__tips li { padding-left: 22px; position: relative; }
+.planb__tips li::before { content: ""; position: absolute; left: 4px; top: .65em; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); }
+
 /* ===== Maisons page ===== */
 .maisons-page { padding-top: 64px; }
 
@@ -255,13 +274,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .maison-card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 24px; display: flex; flex-direction: column; gap: 8px;
+  padding: 24px; display: flex; flex-direction: column; gap: 16px;
   box-shadow: 0 4px 20px rgba(31, 42, 68, 0.06);
+  transition: transform .15s, border-color .15s;
 }
+.maison-card:hover { transform: translateY(-2px); border-color: var(--mint); }
 .maison-card h3 { font-size: 1.1rem; font-weight: 800; }
-.maison-card__elig { color: var(--body); font-size: .95rem; }
-.maison-card__link { margin-top: auto; padding-top: 8px; font-weight: 700; }
-.maison-card__link:hover { text-decoration: underline; }
+.maison-card__link { margin-top: auto; font-weight: 700; } /* pinned to the bottom of the card */
+.maison-card:hover .maison-card__link { text-decoration: underline; }
 
 /* ===== Footer (midnight) ===== */
 .footer { background: var(--midnight); margin-top: 80px; padding: 48px 0; color: var(--on-dark-muted); }
@@ -286,7 +306,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 1100px) {
   .nav { gap: 22px; }
   .features { grid-template-columns: repeat(2, 1fr); }
-  .main-grid { grid-template-columns: 1fr; }
+  .main-grid { grid-template-columns: minmax(0, 1fr); }
   .maison-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -306,7 +326,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .hero { padding: 40px 0 104px; }
   .hero--small { padding: 32px 0 56px; }
   .hero__content p br { display: none; }
-  .features { grid-template-columns: 1fr; margin-top: -56px; }
+  /* compact cards: icon on the left, title + description on the right */
+  .features { grid-template-columns: 1fr; margin-top: -56px; gap: 10px; }
+  .feature {
+    display: grid; grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 14px; align-items: center; padding: 12px 16px;
+  }
+  .feature .icon-badge { grid-row: 1 / span 2; width: 44px; height: 44px; border-radius: 12px; }
+  .feature .icon { width: 22px; height: 22px; }
+  .feature h3 { font-size: 1.02rem; margin: 0; }
+  .feature p { font-size: .88rem; line-height: 1.4; }
   .card { padding: 24px 20px; }
   .step { gap: 14px; padding-right: 16px; }
   .maison-grid { grid-template-columns: 1fr; }
@@ -314,4 +343,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .main-grid { margin-top: 48px; }
   .footer { margin-top: 64px; }
   .footer__inner { flex-direction: column; align-items: flex-start; gap: 28px; }
+}
+
+/* ===== Very small phones (320px) ===== */
+@media (max-width: 400px) {
+  .header__inner { gap: 10px; }
+  .logo { gap: 8px; min-width: 0; }
+  .logo__icon { width: 38px; height: 38px; }
+  .logo__text strong { font-size: 1.05rem; }
+  .header__actions { gap: 8px; }
+  .lang { padding: 8px 10px; }
 }
