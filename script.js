@@ -1,3 +1,28 @@
+// ===== Fade-up when sections scroll into view =====
+// If the visitor prefers reduced motion (or the browser is old), everything is shown at once.
+try {
+  const items = document.querySelectorAll(".reveal");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) {
+    items.forEach((el) => el.classList.add("is-visible"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target); // animate only once
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    items.forEach((el) => io.observe(el));
+  }
+} catch (e) {
+  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+}
+
 // ===== Mobile menu =====
 document.getElementById("menuBtn").addEventListener("click", () => {
   document.getElementById("nav").classList.toggle("is-open");
