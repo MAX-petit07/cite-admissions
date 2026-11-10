@@ -42,7 +42,7 @@
           <option>FR</option>
           <option>ES</option>
         </select>
-        <a href="index.html#guide" class="btn btn--dark">Apply Now</a>
+        <a href="index.html#guide" class="btn btn--mint">Apply Now</a>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -59,7 +59,7 @@
   <main class="container maisons-page">
 
     <!-- Source note: facts come from ciup-verified-info.md (checked on ciup.fr, 10 Nov 2026) -->
-    <div class="notice notice--ok" role="note">
+    <div class="notice" role="note">
       <strong>Source:</strong> the list of houses comes from
       <a href="https://www.ciup.fr/maisons-liste/" target="_blank" rel="noopener">ciup.fr/maisons-liste</a>
       (checked on 10 November 2026). The list page gives no description or eligibility for each house,
@@ -321,8 +321,17 @@
   </main>
 
   <!-- ============ FOOTER (same as homepage) ============ -->
-  <footer class="footer container">
-    <p>Cité Admissions is a student prototype and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <!-- Official information area: the logo file goes in images/ciup-logo.png -->
+      <div class="official">
+        <a class="official__logo" href="https://www.ciup.fr" target="_blank" rel="noopener" aria-label="Cité internationale universitaire de Paris, official website">
+          <img src="images/ciup-logo.png" alt="Cité internationale universitaire de Paris" onerror="this.replaceWith(document.createTextNode('ciup.fr'))" />
+        </a>
+        <p class="official__text"><strong>Official information:</strong> Cité internationale universitaire de Paris</p>
+      </div>
+      <p class="footer__disclaimer">Cité Admissions is a student prototype and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+    </div>
   </footer>
 
   <!-- Same script: it opens the phone menu (the other parts only run on the homepage) -->

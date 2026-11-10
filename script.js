@@ -6,7 +6,6 @@ document.getElementById("menuBtn").addEventListener("click", () => {
 // ===== Timeline: tick off steps, saved in the browser =====
 const STORAGE_KEY = "citeAdmissionsProgress";
 const steps = document.querySelectorAll(".step");
-const glanceItems = document.querySelectorAll("#glance li");
 
 function loadProgress() {
   try {
@@ -38,9 +37,6 @@ function render() {
     step.classList.toggle("is-current", isCurrent);
   });
 
-  // Highlight the matching row in "at a glance" (first one not done)
-  const glanceIndex = Math.min(done.length, glanceItems.length - 1);
-  glanceItems.forEach((li, i) => li.classList.toggle("is-current", i === glanceIndex));
 }
 
 steps.forEach((step) => {
