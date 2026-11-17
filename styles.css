@@ -1,5 +1,5 @@
 /* =====================================================
-   Cité Admissions — "Midnight and mint" palette
+   MANI — "Midnight and mint" palette
    All colours are defined HERE, once. Everywhere else we
    use var(--name), never a hard-coded colour.
    ===================================================== */
@@ -216,6 +216,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .step4 h3 { font-size: 1.2rem; font-weight: 800; line-height: 1.25; }
 .step4 p { margin: 8px 0 12px; }
 .step4 a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+/* Who can apply */
+.profiles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.profile { padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.profile h3 { font-size: 1.2rem; font-weight: 800; }
+.profile ul { margin-left: 1.1rem; display: flex; flex-direction: column; gap: 8px; }
 
 /* Key facts */
 .facts4 { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
@@ -771,6 +777,8 @@ body:has(dialog[open]) { overflow: hidden; }
   .band { padding: 56px 0; }
   .band__head { margin-bottom: 28px; }
   .worries, .facts4 { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .profiles { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .profile { padding: 22px 20px; }
   .worry { flex-direction: row; align-items: center; padding: 20px; }
   .worry h3 { font-size: 1.05rem; }
   /* steps stack, with a vertical line between the icons */

@@ -359,7 +359,7 @@
   function render() {
     if (!current) return;
     var v = QA.viewer();
-    document.title = current.title + " — Cité Admissions";
+    document.title = current.title + " — MANI";
     renderQuestion(current, v);
     renderAnswers(current, v);
     renderAnswerBox(current, v);

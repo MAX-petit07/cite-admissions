@@ -16,7 +16,8 @@
   var Auth = window.CiteAuth;
   if (!Auth) return;
 
-  // PLACEHOLDER: replace with the team's real address before the public test.
+  // TODO(MANI): put the team's REAL address here before the public test.
+  // Every "Report" link on the site mails this address. "team@example.com" is only a placeholder.
   var REPORT_EMAIL = "team@example.com";
 
   var PAGE_SIZE = 20;
