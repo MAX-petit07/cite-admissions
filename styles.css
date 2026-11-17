@@ -102,6 +102,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .nav { display: flex; gap: 36px; }
 .nav__link {
+  white-space: nowrap;
   font-weight: 600; color: var(--on-dark-muted);
   padding: 6px 2px; border-bottom: 3px solid transparent;
   transition: color .15s;
@@ -116,6 +117,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .lang option { background: var(--card); color: var(--heading); } /* the dropdown list is white */
 .menu-btn { display: none; background: none; border: none; color: var(--on-dark); font-size: 1.8rem; line-height: 1; padding: 4px 8px; border-radius: 8px; }
+
+
+/* ===== Header: account button / signed-in chip ===== */
+.auth-slot { display: flex; align-items: center; }
+.auth-btn { padding: 10px 22px; }
+.auth-chip {
+  display: inline-flex; align-items: center; gap: 10px; max-width: 190px;
+  border: 1px solid var(--line); border-radius: var(--pill); padding: 5px 16px 5px 6px;
+  color: var(--on-dark); font-weight: 700; transition: background .15s;
+}
+.auth-chip:hover { background: rgba(255, 255, 255, 0.1); }
+.auth-chip__avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  background: var(--mint); color: var(--midnight); font-size: .9rem; font-weight: 800;
+  display: grid; place-items: center;
+}
+.auth-chip__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.nav__account { display: none; } /* only used inside the phone menu */
+
+/* "Apply Now" duplicates the "Apply" link, so it makes room on medium screens */
+@media (max-width: 1350px) {
+  .header__actions > .btn { display: none; }
+  .nav { gap: 28px; }
+}
+@media (max-width: 600px) {
+  .auth-slot { display: none; }          /* on phones the account link lives in the menu */
+  .nav__account { display: block; }
+}
 
 /* ===== Hero (midnight) ===== */
 .hero { background: var(--midnight); color: var(--on-dark-muted); padding: 56px 0 120px; }
@@ -361,24 +390,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ===== Alumni page ===== */
 .hero--page { padding: 56px 0 72px; }
 .hero--page .hero__content p { margin-bottom: 28px; }
-.alumni-page { padding-top: 56px; }
 
 .section { margin-top: 72px; }
 .section__head { max-width: 46em; margin-bottom: 28px; }
-.section__head h2, .volunteer h2, .rules-card h2 { font-size: 1.9rem; font-weight: 800; letter-spacing: -.01em; }
+.section__head h2, .rules-card h2 { font-size: 1.9rem; font-weight: 800; letter-spacing: -.01em; }
 .section__head p { margin-top: 8px; }
 
-/* How it works */
-.how { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.how__step { padding: 28px; }
-.how__step h3 { font-size: 1.15rem; font-weight: 800; margin: 18px 0 6px; }
-.how__num {
-  display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 6px;
-  border-radius: 50%; background: var(--midnight); color: var(--on-dark); font-size: .9rem;
-}
-
 /* Small tags and labels */
-.label--example, .label--tips { align-self: flex-start; }
+.label--tips { align-self: flex-start; }
 
 /* Filters */
 .filters { display: flex; flex-direction: column; gap: 14px; }
@@ -388,35 +407,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .chip[aria-pressed="true"]:hover { background: var(--midnight); filter: brightness(1.3); }
 .filters__status { color: var(--muted); font-size: .95rem; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; min-height: 1.6em; }
 .linkbtn { background: none; border: none; padding: 0; color: var(--green); font-weight: 700; text-decoration: underline; border-radius: 4px; }
-
-/* Alumni cards */
-.alumni-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
-.alumni-card {
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 24px; display: flex; flex-direction: column; gap: 16px;
-  box-shadow: 0 4px 20px rgba(31, 42, 68, 0.06);
-}
-.alumni-card__top { display: flex; gap: 14px; align-items: center; }
-.alumni-card__top > div { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; min-width: 0; }
-.alumni-card h3 { font-size: 1.1rem; font-weight: 800; }
-.avatar {
-  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
-  background: var(--mint); color: var(--midnight); font-weight: 800;
-  display: grid; place-items: center;
-}
-.facts { list-style: none; display: flex; flex-direction: column; gap: 2px; font-size: .95rem; }
-.can-help__label { display: block; font-size: .85rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-.tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
-.tags li {
-  background: var(--mint-tint); color: var(--heading); border: 1px solid var(--line);
-  border-radius: var(--pill); padding: 2px 12px; font-size: .82rem; font-weight: 600;
-}
-.alumni-card .btn { margin-top: auto; align-self: flex-start; }
-
-/* Volunteer */
-.volunteer { display: flex; gap: 32px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-.volunteer > div { max-width: 40em; }
-.volunteer p { margin-top: 8px; }
 
 /* Community rules */
 .rules-card__intro { margin: 6px 0 24px; color: var(--muted); }
@@ -468,7 +458,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .field { display: flex; flex-direction: column; gap: 6px; margin-top: 18px; border: 0; padding: 0; min-width: 0; }
 .field label, .field legend { font-weight: 600; color: var(--heading); }
 .field legend { margin-bottom: 8px; padding: 0; }
-.field input[type="text"], .field input[type="email"], .field select {
+.field input[type="text"], .field input[type="email"], .field input[type="password"], .field select {
   width: 100%; padding: 12px 20px; font: inherit; color: var(--heading);
   background: var(--card); border: 1px solid var(--muted); border-radius: var(--pill);
 }
@@ -476,7 +466,7 @@ body:has(dialog[open]) { overflow: hidden; }
   width: 100%; padding: 14px 20px; font: inherit; color: var(--heading); resize: vertical;
   background: var(--card); border: 1px solid var(--muted); border-radius: var(--radius);
 }
-.field.is-invalid input[type="text"], .field.is-invalid input[type="email"],
+.field.is-invalid input[type="text"], .field.is-invalid input[type="email"], .field.is-invalid input[type="password"],
 .field.is-invalid select, .field.is-invalid textarea {
   border-color: var(--heading); box-shadow: inset 0 0 0 1px var(--heading);
 }
@@ -499,6 +489,201 @@ body:has(dialog[open]) { overflow: hidden; }
 .done:focus { outline: none; }
 .done strong { color: var(--heading); }
 
+/* ===== Account page ===== */
+.container--narrow { width: min(620px, 92%); }
+.account-page { padding-top: 56px; }
+.auth-card { padding: 36px; }
+.auth-card h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
+.auth-card #viewLoading { color: var(--muted); }
+.lockable { border: 0; padding: 0; margin: 0; min-width: 0; }
+
+.tabs {
+  display: flex; gap: 4px; padding: 4px; margin-bottom: 28px;
+  border: 1px solid var(--muted); border-radius: var(--pill);
+}
+.tab {
+  flex: 1; padding: 10px 16px; border: 0; border-radius: var(--pill);
+  background: transparent; color: var(--heading); font-weight: 700; transition: background .15s;
+}
+.tab:hover { background: var(--mint-tint); }
+.tab[aria-selected="true"] { background: var(--midnight); color: var(--on-dark); }
+
+.field__hint { color: var(--muted); font-size: .85rem; }
+
+/* password field with a Show/Hide button */
+.pw { position: relative; }
+.pw input { padding-right: 84px !important; }
+.pw__toggle {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  background: var(--card); border: 1px solid var(--muted); border-radius: var(--pill);
+  padding: 4px 14px; font-size: .85rem; font-weight: 700; color: var(--heading);
+}
+.pw__toggle:hover { background: var(--mint-tint); }
+
+/* Student / Alumni choice as two cards */
+.options { gap: 10px; }
+.option {
+  display: flex; gap: 14px; align-items: flex-start; cursor: pointer;
+  border: 1px solid var(--muted); border-radius: var(--radius); padding: 14px 16px;
+  font-weight: 400 !important; color: var(--body) !important;
+}
+.option input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--midnight); flex-shrink: 0; cursor: pointer; }
+.option span { display: flex; flex-direction: column; gap: 2px; }
+.option strong { color: var(--heading); }
+.option small { color: var(--muted); font-size: .88rem; }
+.option:has(input:checked) { background: var(--mint-tint); border-color: var(--midnight); box-shadow: inset 0 0 0 1px var(--midnight); }
+.option:has(input:focus-visible) { outline: 2px solid var(--green); outline-offset: 2px; }
+
+.auth-fine { margin-top: 18px; color: var(--muted); font-size: .9rem; }
+.auth-fine a { color: var(--green); text-decoration: underline; font-weight: 600; }
+.auth-switch { margin-top: 22px; color: var(--body); }
+.auth-switch .linkbtn { font-size: inherit; }
+
+/* Form-level message: bold dark text with an icon (our palette has no red) */
+.form-message {
+  display: flex; gap: 10px; align-items: flex-start; margin-top: 18px;
+  border: 2px solid var(--heading); border-radius: 12px; padding: 12px 16px;
+  color: var(--heading); font-weight: 700; font-size: .95rem; background: var(--card);
+}
+.form-message::before {
+  content: "!"; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--midnight); color: var(--on-dark); font-size: .85rem;
+  display: grid; place-items: center; margin-top: 1px;
+}
+.form-message--ok { background: var(--mint-tint); border: 1px solid var(--line); }
+.form-message--ok::before { content: "✓"; background: var(--green); }
+.form-message .linkbtn { margin-left: 6px; }
+
+.account-details { margin: 20px 0 12px; display: flex; flex-direction: column; gap: 12px; }
+.account-details div { display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+.account-details dt { width: 120px; font-weight: 700; color: var(--heading); }
+.account-details dd { min-width: 0; overflow-wrap: anywhere; }
+
+/* Role badges (the text always comes from the database) */
+.badge {
+  display: inline-block; border-radius: var(--pill); padding: 3px 14px;
+  font-size: .85rem; font-weight: 700; border: 1px solid var(--muted); color: var(--heading); background: var(--card);
+}
+.badge--student { background: var(--card); border-color: var(--muted); }
+/* unverified alumni: dashed outline, plain background */
+.badge--alumni-unverified { background: var(--card); border: 1px dashed var(--heading); }
+/* verified alumni: mint fill with a tick (mint is decoration, the text stays dark) */
+.badge--alumni-verified { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.badge--alumni-verified::before { content: "✓ "; font-weight: 800; }
+/* MANI team: solid midnight */
+.badge--team { background: var(--midnight); border-color: var(--midnight); color: var(--on-dark); }
+
+/* ===== Community Q&A ===== */
+.community-page, .question-page { padding-top: 56px; }
+.section--tight { margin-top: 56px; }
+.hero-link { color: var(--mint); text-decoration: underline; font-weight: 700; }
+.hero-link:hover { color: var(--on-dark); }
+.btn--small { padding: 8px 18px; font-size: .9rem; }
+.check--inline { display: inline-flex; align-items: center; }
+
+/* legend: how to read the labels */
+.legend { padding: 28px 32px; }
+.legend h2 { font-size: 1.5rem; margin-bottom: 18px; }
+.legend h3 { font-size: 1rem; font-weight: 800; margin-bottom: 12px; }
+.legend__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.legend__list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.legend__list li { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; font-size: .95rem; }
+
+/* answer-source labels: rectangles, so they never look like the pill-shaped role badges */
+.source {
+  display: inline-block; border-radius: 8px; padding: 3px 12px;
+  font-size: .85rem; font-weight: 700; border: 1px solid var(--line); color: var(--heading); background: var(--card);
+}
+.source--alumni { background: var(--mint-tint); border-color: var(--green); }
+.source--team { background: var(--midnight); border-color: var(--midnight); color: var(--on-dark); }
+.source--team::before { content: "✓ "; font-weight: 800; }
+
+/* search + category filters */
+.toolbar { display: flex; flex-direction: column; gap: 18px; }
+.search--inline { margin: 0; }
+
+/* the list */
+.q-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+.q-card {
+  position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 22px 26px; display: flex; flex-direction: column; gap: 10px;
+  box-shadow: 0 4px 20px rgba(31, 42, 68, 0.06); transition: transform .15s, border-color .15s;
+}
+.q-card:hover { transform: translateY(-2px); border-color: var(--mint); }
+.q-card__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.q-card__title { font-size: 1.2rem; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
+.q-card__title a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); } /* the whole card is clickable */
+.q-card__title a:hover { text-decoration: underline; }
+.q-card:has(a:focus-visible) { outline: 2px solid var(--green); outline-offset: 2px; }
+.q-card__title a:focus-visible { outline: none; }
+.q-card__excerpt { color: var(--body); overflow-wrap: anywhere; }
+.is-hidden { border-style: dashed; border-color: var(--heading); }
+.q-more { margin-top: 24px; }
+
+.tag-cat, .tag-starter, .tag-hidden {
+  display: inline-block; border-radius: 8px; padding: 2px 10px; font-size: .8rem; font-weight: 700;
+}
+.tag-cat { background: var(--mint-tint); border: 1px solid var(--line); color: var(--heading); }
+.tag-starter { background: var(--card); border: 1px solid var(--green); color: var(--green); }
+.tag-hidden { background: var(--card); border: 1px dashed var(--heading); color: var(--heading); }
+
+.q-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: .9rem; color: var(--muted); }
+.q-meta__name { font-weight: 700; color: var(--heading); overflow-wrap: anywhere; }
+
+/* one question */
+.q-full { padding: 32px; display: flex; flex-direction: column; gap: 14px; }
+.q-full__title { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem); font-weight: 800; letter-spacing: -.01em; line-height: 1.2; overflow-wrap: anywhere; }
+.q-body { white-space: pre-wrap; overflow-wrap: anywhere; color: var(--body); }
+.starter-note { font-size: .9rem; color: var(--muted); border-left: 3px solid var(--mint); padding-left: 12px; }
+.q-foot { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 4px; }
+.report-link { color: var(--muted); font-size: .9rem; text-decoration: underline; }
+.report-link:hover { color: var(--heading); }
+.mod-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.mod-bar__label { font-size: .85rem; font-weight: 700; color: var(--heading); }
+
+/* answers */
+.answers { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+.q-card, .answer, .q-full { min-width: 0; overflow-wrap: anywhere; } /* a long pasted link can never widen the page */
+.answer {
+  background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--line);
+  border-radius: var(--radius); padding: 22px 26px; display: flex; flex-direction: column; gap: 10px;
+  box-shadow: 0 4px 20px rgba(31, 42, 68, 0.06);
+}
+.answer--alumni { border-left-color: var(--mint); }
+.answer--team { border-left-color: var(--midnight); }
+.answer.is-hidden { border-left-style: dashed; }
+.answer__top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.answer__note { font-size: .88rem; color: var(--muted); }
+.source-link { font-size: .92rem; color: var(--body); overflow-wrap: anywhere; }
+.source-link a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+/* short rules shown next to the forms */
+.rules-mini {
+  background: var(--mint-tint); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px 18px; margin-top: 20px; font-size: .92rem;
+}
+.rules-mini strong { color: var(--heading); }
+.rules-mini ul { margin: 6px 0 8px 18px; }
+.rules-mini a { color: var(--green); font-weight: 700; text-decoration: underline; }
+
+/* Team tools */
+.team-tools { padding: 0; }
+.team-tools summary { cursor: pointer; padding: 20px 28px; font-weight: 800; color: var(--heading); border-radius: var(--radius); }
+.team-tools summary:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.team-tools__body { padding: 0 28px 28px; display: flex; flex-direction: column; gap: 14px; }
+.team-tools__search input {
+  width: 100%; max-width: 420px; padding: 11px 18px; font: inherit; color: var(--heading);
+  background: var(--card); border: 1px solid var(--muted); border-radius: var(--pill);
+}
+.members { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.member {
+  display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; align-items: center;
+  border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px;
+}
+.member__who { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; min-width: 0; overflow-wrap: anywhere; }
+.member__meta { color: var(--muted); font-size: .85rem; }
+.member__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
 /* ===== Footer (midnight) ===== */
 .footer { background: var(--midnight); margin-top: 80px; padding: 48px 0; color: var(--on-dark-muted); }
 .footer__inner { display: flex; gap: 40px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
@@ -520,14 +705,13 @@ body:has(dialog[open]) { overflow: hidden; }
 
 /* ===== Tablet ===== */
 @media (max-width: 1100px) {
-  .nav { gap: 22px; }
   .main-grid { grid-template-columns: minmax(0, 1fr); }
   .maison-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ===== Phone ===== */
 /* ===== Menu becomes a button (6 links don't fit on a tablet) ===== */
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .nav {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; gap: 4px; background: var(--midnight);
@@ -540,7 +724,6 @@ body:has(dialog[open]) { overflow: hidden; }
 
 @media (max-width: 800px) {
   .header__inner { height: 76px; }
-  .header__actions .btn { display: none; }
   .logo__text small { display: none; }
     .hero--small { padding: 32px 0 56px; }
   .hero__content p br { display: none; }
@@ -562,18 +745,12 @@ body:has(dialog[open]) { overflow: hidden; }
   .lang { padding: 8px 10px; }
 }
 
-/* ===== Alumni page: tablet and phone ===== */
-@media (max-width: 1100px) {
-  .alumni-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .how { grid-template-columns: minmax(0, 1fr); }
-}
+/* ===== Shared sections (rules, FAQ, headings): tablet and phone ===== */
 @media (max-width: 800px) {
-  .alumni-grid { grid-template-columns: minmax(0, 1fr); }
   .rules { grid-template-columns: minmax(0, 1fr); }
   .hero--page { padding: 40px 0 56px; }
-  .alumni-page { padding-top: 40px; }
   .section { margin-top: 56px; }
-  .section__head h2, .volunteer h2, .rules-card h2 { font-size: 1.6rem; }
+  .section__head h2, .rules-card h2 { font-size: 1.6rem; }
   .filter-group__label { width: 100%; }
   .panel { padding: 22px 20px; }
 }
@@ -602,4 +779,24 @@ body:has(dialog[open]) { overflow: hidden; }
   .step4:not(:last-child)::after, .step4:nth-child(2)::after { display: block; top: 60px; bottom: -28px; left: 25px; right: auto; width: 2px; height: auto; }
   .talk { flex-direction: column; align-items: flex-start; }
   .cta__inner { align-items: flex-start; text-align: left; }
+}
+
+/* ===== Account page: phone ===== */
+@media (max-width: 800px) {
+  .account-page { padding-top: 40px; }
+  .auth-card { padding: 24px 20px; }
+  .account-details dt { width: 100%; }
+}
+
+/* ===== Community Q&A: phone ===== */
+@media (max-width: 800px) {
+  .community-page, .question-page { padding-top: 40px; }
+  .section--tight { margin-top: 40px; }
+  .legend { padding: 22px 20px; }
+  .legend__cols { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .q-card { padding: 18px 18px; }
+  .q-full { padding: 22px 20px; }
+  .answer { padding: 18px 18px; border-left-width: 5px; }
+  .team-tools summary { padding: 18px 20px; }
+  .team-tools__body { padding: 0 20px 22px; }
 }

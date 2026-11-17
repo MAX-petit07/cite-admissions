@@ -33,8 +33,9 @@
         <a href="index.html#guide" class="nav__link">Apply</a>
         <a href="maisons.html" class="nav__link is-active">Maisons</a>
         <a href="eligibility.html" class="nav__link">Eligibility</a>
-        <a href="alumni.html" class="nav__link">Alumni</a>
+        <a href="community.html" class="nav__link">Community</a>
         <a href="index.html#faq" class="nav__link">FAQ</a>
+        <a href="account.html" class="nav__link nav__account" data-auth-nav>Sign in</a>
       </nav>
 
       <div class="header__actions">
@@ -44,6 +45,7 @@
           <option>ES</option>
         </select>
         <a href="index.html#guide" class="btn btn--ghost">Apply Now</a>
+        <div class="auth-slot" data-auth-slot><a href="account.html" class="btn btn--ghost auth-btn">Sign in</a></div>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -288,6 +290,10 @@
   </footer>
 
   <!-- Same script: it opens the phone menu (the other parts only run on the homepage) -->
+  <!-- Supabase browser library (pinned version, integrity-checked), then our config + account code -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

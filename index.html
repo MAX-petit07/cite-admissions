@@ -35,8 +35,9 @@
         <a href="#guide" class="nav__link">Apply</a>
         <a href="maisons.html" class="nav__link">Maisons</a>
         <a href="eligibility.html" class="nav__link">Eligibility</a>
-        <a href="alumni.html" class="nav__link">Alumni</a>
+        <a href="community.html" class="nav__link">Community</a>
         <a href="#faq" class="nav__link">FAQ</a>
+        <a href="account.html" class="nav__link nav__account" data-auth-nav>Sign in</a>
       </nav>
 
       <div class="header__actions">
@@ -46,6 +47,7 @@
           <option>ES</option>
         </select>
         <a href="#guide" class="btn btn--ghost">Apply Now</a>
+        <div class="auth-slot" data-auth-slot><a href="account.html" class="btn btn--ghost auth-btn">Sign in</a></div>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -287,14 +289,14 @@
       </div>
     </section>
 
-    <!-- ============ 6. ALUMNI ============ -->
-    <section class="band band--white" aria-labelledby="alumni-title">
+    <!-- ============ 6. COMMUNITY Q&A ============ -->
+    <section class="band band--white" aria-labelledby="community-title">
       <div class="container talk reveal">
         <div>
-          <h2 class="band__title" id="alumni-title">Talk to someone who's been there</h2>
-          <p>Ask former CIUP residents about applying, choosing a house and life at the Cité. They share their own experience, not official information.</p>
+          <h2 class="band__title" id="community-title">Ask the community</h2>
+          <p>Ask questions about applying to the Cité and read answers from students, alumni and the MANI team. Answers are personal experience or MANI's own checks, never official CIUP information.</p>
         </div>
-        <a href="alumni.html" class="btn btn--dark">Ask an alumni</a>
+        <a href="community.html" class="btn btn--dark">Open the Community Q&amp;A</a>
       </div>
     </section>
 
@@ -322,6 +324,10 @@
     </div>
   </footer>
 
+  <!-- Supabase browser library (pinned version, integrity-checked), then our config + account code -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
