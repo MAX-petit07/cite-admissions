@@ -183,7 +183,7 @@ if (stepList.length) {
   openOnly(cur ? cur.dataset.id : null); // first visit: the step to do now is already open (without JavaScript every step stays readable)
 }
 
-// ===== Homepage: one card with five tabs =====
+// ===== Homepage: one card with four tabs =====
 // Without JavaScript every panel simply shows one after another (the tab bar stays hidden).
 (function () {
   const hub = document.getElementById("hub");
@@ -317,75 +317,6 @@ if (stepList.length) {
     window.addEventListener("load", () => { if (!userScrolled) jump(); });
   }
 })();
-
-// ===== AI assistant (placeholder — not connected to a real AI yet) =====
-const form = document.getElementById("askForm");
-const input = document.getElementById("askInput");
-const log = document.getElementById("chatLog");
-
-function addMessage(text, who, link) {
-  const div = document.createElement("div");
-  div.className = `msg msg--${who}`;
-  div.textContent = text;
-  // Optional "official source" link under the answer
-  if (link) {
-    const a = document.createElement("a");
-    a.href = link.url;
-    a.textContent = link.label + " →";
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.className = "msg__link";
-    div.appendChild(document.createElement("br"));
-    div.appendChild(a);
-  }
-  log.appendChild(div);
-  log.scrollTop = log.scrollHeight;
-}
-
-// Answers for the 3 suggestion buttons. Every sentence comes from ciup-verified-info.md.
-const ANSWERS = {
-  criteria: {
-    text:
-      "Students need to be enrolled in a Master's or doctorate (Bac+4 or equivalent) at a French public or private higher-education institution, preferably in Île-de-France. Arts students can apply once their programme has reached 3 years of higher education. Researchers, artists and (exceptionally) passing guests have their own conditions, and some houses add extra conditions on their own pages.",
-    link: { label: "Official source: Apply for accommodation", url: "https://www.ciup.fr/en/apply-for-accommodation/" },
-  },
-  response: {
-    text:
-      "CIUP sends the result by email, whatever the outcome. Admissions committees meet several times a year, and no general processing time is published. If you have no accommodation offer 15 days before your desired arrival date, your application has not been accepted.",
-    link: { label: "Official source: Apply for accommodation", url: "https://www.ciup.fr/en/apply-for-accommodation/" },
-  },
-  maison: {
-    text:
-      "I can't tell you which house is best, because ciup.fr doesn't publish per-house details on its list page. There are three routes: a school house (for example AgroParisTech or Arts et Métiers students), a national house (for nationalities represented by a house), or the central admissions service for everyone else. Open a house's official page to see its own conditions.",
-    link: { label: "Official source: list of houses", url: "https://www.ciup.fr/maisons-liste/" },
-  },
-};
-
-// Only run on pages that have the assistant box (maisons.html doesn't)
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const question = input.value.trim();
-    if (!question) return;
-    addMessage(question, "user");
-    input.value = "";
-    setTimeout(() => {
-      addMessage(
-        "Thanks for your question! The assistant isn't connected yet. In the meantime, please check the official CIUP website: www.ciup.fr",
-        "bot"
-      );
-    }, 500);
-  });
-
-  // Suggestion chips: show the question, then the answer from ANSWERS
-  document.querySelectorAll(".chip").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      const answer = ANSWERS[chip.dataset.key];
-      addMessage(chip.textContent, "user");
-      setTimeout(() => addMessage(answer.text, "bot", answer.link), 300);
-    });
-  });
-}
 
 // ===== Maisons page: search box filters the cards by name =====
 const search = document.getElementById("maisonSearch");

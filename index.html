@@ -33,12 +33,11 @@
 
       <nav class="nav" id="nav">
         <a href="index.html" class="nav__link is-active">Home</a>
-        <a href="#how-it-works" class="nav__link">Apply</a>
+        <a href="#how-it-works" class="nav__link">How to apply</a>
+        <a href="#guide" class="nav__link">My progress</a>
         <a href="maisons.html" class="nav__link">Maisons</a>
         <a href="#who-can-apply" class="nav__link">Eligibility</a>
-        <a href="community.html" class="nav__link">Community</a>
         <a href="#faq" class="nav__link">FAQ</a>
-        <a href="account.html" class="nav__link nav__account" data-auth-nav>Sign in</a>
       </nav>
 
       <div class="header__actions">
@@ -47,8 +46,6 @@
           <option>FR</option>
           <option>ES</option>
         </select>
-        <a href="#how-it-works" class="btn btn--ghost">Apply Now</a>
-        <div class="auth-slot" data-auth-slot><a href="account.html" class="btn btn--ghost auth-btn">Sign in</a></div>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
       </div>
     </div>
@@ -62,8 +59,8 @@
         <h1>Applying to the Cité, explained in plain English</h1>
         <p class="hero__sub">Find out if you can apply, which house to contact, what to prepare and when to expect an answer, all in one place, with links to official sources.</p>
         <div class="hero__buttons">
-          <a href="#who-can-apply" class="btn btn--mint">Check if you're eligible <span aria-hidden="true">→</span></a>
-          <a href="#guide" class="btn btn--ghost">Track my progress</a>
+          <a href="#guide" class="btn btn--mint">Track my progress <span aria-hidden="true">→</span></a>
+          <a href="#who-can-apply" class="btn btn--ghost">Check if you're eligible</a>
         </div>
         <ul class="trust">
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg>Free</li>
@@ -109,10 +106,6 @@
         <button type="button" role="tab" class="tab-btn" id="tab-guide" aria-controls="guide" aria-selected="false" tabindex="-1">
           <span class="tab-btn__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.5 6 1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11M3.5 18l1.5 1.5 2.5-2.5"/></svg></span>
           <span class="tab-btn__text"><span class="tab-btn__name">My progress <span class="tab-badge" id="progressBadge" aria-hidden="true">0/5</span><span class="sr-only" id="progressBadgeText">0 of 5 steps done</span></span><span class="tab-btn__hint">Your checklist</span></span>
-        </button>
-        <button type="button" role="tab" class="tab-btn" id="tab-ask" aria-controls="ask" aria-selected="false" tabindex="-1">
-          <span class="tab-btn__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/></svg></span>
-          <span class="tab-btn__text"><span class="tab-btn__name">Ask</span><span class="tab-btn__hint">Get answers</span></span>
         </button>
           </div>
 
@@ -417,44 +410,6 @@
         </div>
       </section>
             </div>
-      <div class="tabpanel__next"><button type="button" class="btn btn--light" data-goto="ask">Next: Ask <span aria-hidden="true">→</span></button></div>
-          </section>
-
-          <!-- ===== 5. ASK ===== -->
-          <section class="tabpanel" role="tabpanel" id="ask" aria-labelledby="tab-ask">
-            <h2 class="tabpanel__title">Ask a question</h2>
-            <div class="panel-grid panel-grid--ask">
-      <section class="card assistant" id="assistant">
-        <div class="assistant__head">
-          <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M3 4h13v9H8l-5 4z"/><path d="M8 17v1h9l4 3V9h-5"/><path d="M7 8.5h.01M10 8.5h.01M13 8.5h.01"/></svg></span>
-          <div>
-            <h3 class="card__title">Ask our AI Assistant</h3>
-            <p class="muted">Have a question about the application, eligibility or life at CIUP?<br />Tap a suggestion for an answer based on ciup.fr. Free typing isn't connected yet.</p>
-          </div>
-        </div>
-
-        <div id="chatLog" class="chat-log" aria-live="polite"></div>
-
-        <form class="ask" id="askForm">
-          <input type="text" id="askInput" placeholder="Ask a question..." autocomplete="off" />
-          <button type="submit" class="ask__send" aria-label="Send">
-            <svg viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></svg>
-          </button>
-        </form>
-
-        <div class="chips">
-          <button class="chip" data-key="criteria">What are the admission criteria?</button>
-          <button class="chip" data-key="response">When will I get a response?</button>
-          <button class="chip" data-key="maison">Which Maison is right for me?</button>
-        </div>
-      </section>
-
-              <section class="card community-card">
-                <h3 class="card__title">Ask the community</h3>
-                <p>Ask questions about applying to the Cité and read answers from students, alumni and the MANI team. Answers are personal experience or MANI's own checks, never official CIUP information.</p>
-                <a href="community.html" class="btn btn--dark">Open the Community Q&amp;A</a>
-              </section>
-            </div>
           </section>
 
         </div>
@@ -475,10 +430,6 @@
     </div>
   </footer>
 
-  <!-- Supabase browser library (pinned version, integrity-checked), then our config + account code -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
-  <script src="supabase-config.js"></script>
-  <script src="auth.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
