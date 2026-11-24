@@ -213,60 +213,188 @@
             <div class="panel-grid">
 
     <!-- Timeline -->
-    <section class="card timeline-card">
+    <section class="card timeline-card journey" aria-labelledby="journey-title">
       <div class="card__head">
-        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></span>
+        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg></span>
         <div>
-          <h3 class="card__title">Your application timeline</h3>
-          <p class="muted">A personalised timeline based on your profile and intake.</p>
+          <h3 class="card__title" id="journey-title">Your application journey</h3>
+          <p class="muted">Five steps, from “can I apply?” to moving in. You are always on one step: the dark one.</p>
         </div>
       </div>
 
-      <!-- Rules below come from ciup-verified-info.md (sections 4, 5 and 6), checked on ciup.fr -->
+      <!-- First visit: how this works -->
+      <ol class="howto">
+        <li>Tap a step to open it and read what to do.</li>
+        <li>Do it, then press <strong>“Mark as done”</strong>.</li>
+        <li>Your progress is saved on this device. It doesn't track your real application.</li>
+      </ol>
+
+      <!-- Where am I? -->
+      <div class="progress">
+        <div class="progress__bar" role="progressbar" aria-label="Steps done" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span id="journeyBar"></span></div>
+        <p class="progress__text" id="journeyText">0 of 5 steps done</p>
+        <button type="button" class="linkbtn" id="journeyJump">Go to my current step</button>
+      </div>
+      <p class="sr-only" id="journeyLive" role="status"></p>
+
+      <!-- Jump to any step -->
+      <nav class="stepper" aria-label="Jump to a step">
+        <ol>
+          <li data-for="eligibility"><a href="#step-eligibility"><span class="stepper__num">1</span><span class="stepper__label">Eligibility</span></a></li>
+          <li data-for="documents"><a href="#step-documents"><span class="stepper__num">2</span><span class="stepper__label">Documents</span></a></li>
+          <li data-for="submit"><a href="#step-submit"><span class="stepper__num">3</span><span class="stepper__label">Apply</span></a></li>
+          <li data-for="response"><a href="#step-response"><span class="stepper__num">4</span><span class="stepper__label">Answer</span></a></li>
+          <li data-for="move"><a href="#step-move"><span class="stepper__num">5</span><span class="stepper__label">Move in</span></a></li>
+        </ol>
+      </nav>
+
+      <!-- Rules below come from ciup-verified-info.md (sections 4, 5 and 6) and the official ciup.fr pages -->
       <ol class="timeline" id="timeline">
-        <li class="step" data-id="eligibility">
-          <button class="step__dot" aria-label="Mark as done"></button>
-          <div class="step__text">
-            <h4>Check your eligibility</h4>
-            <span class="step__date">Start here</span>
+        <li class="step" data-id="eligibility" id="step-eligibility">
+          <button type="button" class="step__dot" aria-pressed="false" aria-label="Mark step 1 as done: Check your eligibility"><span class="step__num" aria-hidden="true">1</span></button>
+          <div class="step__card">
+            <h4 class="step__title">
+              <button type="button" class="step__head" aria-expanded="false" aria-controls="step-eligibility-body">
+                <span class="step__text">
+                  <span class="step__status">Up next</span>
+                  <span class="step__name">Check your eligibility</span>
+                  <span class="step__date">Start here: see which profile fits you</span>
+                </span>
+                <span class="step__chev" aria-hidden="true"></span>
+              </button>
+            </h4>
+            <div class="step__body" id="step-eligibility-body" hidden>
+              <p class="step__what">CIUP accepts four kinds of profile. Find yours.</p>
+              <ul class="step__todo">
+              <li>Students and athletes: a Master's or doctorate (Bac+4 or equivalent) at a French institution, preferably in Île-de-France.</li>
+              <li>Researchers: a doctorate and a post-doctoral project, or a teacher-researcher.</li>
+              <li>Artists: finished studies and a specific artistic project in Île-de-France.</li>
+              </ul>
+              <div class="step__actions">
+              <a class="btn btn--light" href="#who-can-apply">Read who can apply <span aria-hidden="true">→</span></a>
+                <button type="button" class="btn btn--mint step__done">Mark as done</button>
+              </div>
+              <p class="step__source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026</p>
+            </div>
           </div>
-          <span class="step__check" aria-hidden="true">✓</span>
         </li>
-        <li class="step" data-id="documents">
-          <button class="step__dot" aria-label="Mark as done"></button>
-          <div class="step__text">
-            <h4>Prepare your documents</h4>
-            <span class="step__date">Passport or ID card copy + ID photo</span>
+        <li class="step" data-id="documents" id="step-documents">
+          <button type="button" class="step__dot" aria-pressed="false" aria-label="Mark step 2 as done: Prepare your documents"><span class="step__num" aria-hidden="true">2</span></button>
+          <div class="step__card">
+            <h4 class="step__title">
+              <button type="button" class="step__head" aria-expanded="false" aria-controls="step-documents-body">
+                <span class="step__text">
+                  <span class="step__status">Up next</span>
+                  <span class="step__name">Prepare your documents</span>
+                  <span class="step__date">Passport or ID card copy + ID photo</span>
+                </span>
+                <span class="step__chev" aria-hidden="true"></span>
+              </button>
+            </h4>
+            <div class="step__body" id="step-documents-body" hidden>
+              <p class="step__what">You only need two things to start.</p>
+              <ul class="step__todo">
+              <li>A copy of your passport or an ID card.</li>
+              <li>An ID photo.</li>
+              <li>Keep both ready before you open the form.</li>
+              </ul>
+              <div class="step__actions">
+              <a class="btn btn--light" href="#key-facts">See the key facts <span aria-hidden="true">→</span></a>
+                <button type="button" class="btn btn--mint step__done">Mark as done</button>
+              </div>
+              <p class="step__source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026</p>
+            </div>
           </div>
-          <span class="step__check" aria-hidden="true">✓</span>
         </li>
-        <li class="step" data-id="submit">
-          <button class="step__dot" aria-label="Mark as done"></button>
-          <div class="step__text">
-            <h4>Submit your application</h4>
-            <span class="step__date">No deadline · for September, apply in April</span>
+        <li class="step" data-id="submit" id="step-submit">
+          <button type="button" class="step__dot" aria-pressed="false" aria-label="Mark step 3 as done: Submit your application"><span class="step__num" aria-hidden="true">3</span></button>
+          <div class="step__card">
+            <h4 class="step__title">
+              <button type="button" class="step__head" aria-expanded="false" aria-controls="step-submit-body">
+                <span class="step__text">
+                  <span class="step__status">Up next</span>
+                  <span class="step__name">Submit your application</span>
+                  <span class="step__date">No deadline · for September, apply in April</span>
+                </span>
+                <span class="step__chev" aria-hidden="true"></span>
+              </button>
+            </h4>
+            <div class="step__body" id="step-submit-body" hidden>
+              <p class="step__what">Applications are online only. There is no deadline: CIUP accepts new residents all year.</p>
+              <ul class="step__todo">
+              <li>Choose your route: school house, national house or the central admissions service.</li>
+              <li>Fill in the online form for your profile.</li>
+              <li>Choose a username and password, then click “send”.</li>
+              <li>Look for the automatic email. If you don't get it, submit again.</li>
+              <li>For a September arrival, apply in April (the French and English pages differ slightly, so check with CIUP).</li>
+              </ul>
+              <div class="step__actions">
+              <a class="btn btn--light" href="#how-it-works">See the 3 routes <span aria-hidden="true">→</span></a>
+              <a class="btn btn--dark" href="https://bienvenue.ciup.fr/questionnaire/" target="_blank" rel="noopener">Official online form <span aria-hidden="true">↗</span></a>
+                <button type="button" class="btn btn--mint step__done">Mark as done</button>
+              </div>
+              <p class="step__source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026</p>
+            </div>
           </div>
-          <span class="step__check" aria-hidden="true">✓</span>
         </li>
-        <li class="step" data-id="response">
-          <button class="step__dot" aria-label="Mark as done"></button>
-          <div class="step__text">
-            <h4>Receive a response</h4>
-            <span class="step__date">No offer 15 days before arrival = not accepted</span>
+        <li class="step" data-id="response" id="step-response">
+          <button type="button" class="step__dot" aria-pressed="false" aria-label="Mark step 4 as done: Receive a response"><span class="step__num" aria-hidden="true">4</span></button>
+          <div class="step__card">
+            <h4 class="step__title">
+              <button type="button" class="step__head" aria-expanded="false" aria-controls="step-response-body">
+                <span class="step__text">
+                  <span class="step__status">Up next</span>
+                  <span class="step__name">Receive a response</span>
+                  <span class="step__date">No offer 15 days before arrival = not accepted</span>
+                </span>
+                <span class="step__chev" aria-hidden="true"></span>
+              </button>
+            </h4>
+            <div class="step__body" id="step-response-body" hidden>
+              <p class="step__what">CIUP answers by email, whatever the outcome.</p>
+              <ul class="step__todo">
+              <li>Committees meet several times a year.</li>
+              <li>CIUP publishes no general processing time.</li>
+              <li>No offer 15 days before your arrival date means your application wasn't accepted, so start your Plan B before then.</li>
+              <li>The English and French pages of ciup.fr word this rule differently: confirm it with <a href="mailto:admissions.etudiants@ciup.fr">admissions.etudiants@ciup.fr</a>.</li>
+              </ul>
+              <div class="step__actions">
+              <a class="btn btn--light" href="#planb">Open my Plan B <span aria-hidden="true">→</span></a>
+              <a class="btn btn--light" href="#key-facts">See the key dates <span aria-hidden="true">→</span></a>
+                <button type="button" class="btn btn--mint step__done">Mark as done</button>
+              </div>
+              <p class="step__source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a> (English and French pages), checked 24 November 2026</p>
+            </div>
           </div>
-          <span class="step__check" aria-hidden="true">✓</span>
         </li>
-        <li class="step" data-id="move">
-          <button class="step__dot" aria-label="Mark as done"></button>
-          <div class="step__text">
-            <h4>Move in to CIUP</h4>
-            <span class="step__date">Depends on your intake</span>
+        <li class="step" data-id="move" id="step-move">
+          <button type="button" class="step__dot" aria-pressed="false" aria-label="Mark step 5 as done: Move in to CIUP"><span class="step__num" aria-hidden="true">5</span></button>
+          <div class="step__card">
+            <h4 class="step__title">
+              <button type="button" class="step__head" aria-expanded="false" aria-controls="step-move-body">
+                <span class="step__text">
+                  <span class="step__status">Up next</span>
+                  <span class="step__name">Move in to CIUP</span>
+                  <span class="step__date">Depends on your intake</span>
+                </span>
+                <span class="step__chev" aria-hidden="true"></span>
+              </button>
+            </h4>
+            <div class="step__body" id="step-move-body" hidden>
+              <p class="step__what">If you receive an offer, get ready to arrive.</p>
+              <ul class="step__todo">
+              <li>Your arrival date depends on your intake.</li>
+              <li>Once you are a resident, CIUP's acc&ss service helps with visas, residence permits, health insurance, housing-aid applications, transport, banking and phone services.</li>
+              </ul>
+              <div class="step__actions">
+              <a class="btn btn--light" href="https://www.ciup.fr/services/access/" target="_blank" rel="noopener">acc&amp;ss support <span aria-hidden="true">↗</span></a>
+                <button type="button" class="btn btn--mint step__done">Mark as done</button>
+              </div>
+              <p class="step__source">Source: <a href="https://www.ciup.fr/services/access/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026</p>
+            </div>
           </div>
-          <span class="step__check" aria-hidden="true">✓</span>
         </li>
       </ol>
-      <p class="note note--box">CIUP accepts applications all year. For a September arrival, apply in April (the French and English pages differ slightly, so check with CIUP). Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a></p>
-      <p class="note">Click a circle to tick off a step. Your progress is saved in this browser only. It doesn't track your real application with CIUP.</p>
     </section>
 
       <!-- Plan B: official rule (from ciup-verified-info.md) kept apart from our own general tips -->

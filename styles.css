@@ -293,43 +293,94 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .card__head { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 24px; }
 .card__head p { margin-top: 4px; }
 
-/* ===== Timeline ===== */
-.timeline { list-style: none; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-.step {
-  display: flex; align-items: center; gap: 20px;
-  padding: 16px 24px 16px 14px;
-  border-bottom: 1px solid var(--line);
-  position: relative;
+/* ===== Journey timeline ("My progress") ===== */
+/* 1. first-visit help */
+.howto { list-style: none; counter-reset: howto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 22px; }
+.howto li {
+  counter-increment: howto; display: flex; gap: 10px; align-items: flex-start;
+  background: var(--mint-tint); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: .9rem;
 }
-.step:last-child { border-bottom: none; }
-/* vertical line joining the dots */
-.step::before {
-  content: ""; position: absolute; left: 30px; top: 0; bottom: 0;
-  width: 2px; background: var(--line); z-index: 0;
+.howto li::before {
+  content: counter(howto); flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--midnight); color: var(--on-dark); font-size: .8rem; font-weight: 800;
+  display: grid; place-items: center;
 }
-.step:first-child::before { top: 50%; }
-.step:last-child::before { bottom: 50%; }
+
+/* 2. where am I? */
+.progress { margin-bottom: 20px; }
+.progress__bar { height: 10px; border-radius: var(--pill); background: var(--line); overflow: hidden; }
+.progress__bar span { display: block; height: 100%; width: 0; background: var(--mint); transition: width .4s ease; }
+.progress__text { margin: 10px 0 4px; font-weight: 700; color: var(--heading); }
+@media (prefers-reduced-motion: reduce) { .progress__bar span { transition: none; } }
+
+/* 3. stepper: jump to any step */
+.stepper { margin-bottom: 26px; }
+.stepper ol { list-style: none; display: flex; }
+.stepper li { flex: 1; position: relative; text-align: center; min-width: 0; }
+.stepper li + li::before { content: ""; position: absolute; top: 18px; right: 50%; width: 100%; height: 3px; background: var(--line); z-index: 0; }
+.stepper li.is-done::before { background: var(--mint); }
+.stepper a { position: relative; z-index: 1; display: inline-flex; flex-direction: column; align-items: center; gap: 6px; border-radius: 8px; padding: 0 4px; }
+.stepper__num {
+  width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--muted); background: var(--card);
+  color: var(--heading); font-weight: 800; display: grid; place-items: center;
+}
+.stepper__label { font-size: .82rem; font-weight: 700; color: var(--heading); }
+.stepper li.is-done .stepper__num { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.stepper li.is-current .stepper__num { background: var(--midnight); border-color: var(--midnight); color: var(--on-dark); }
+.stepper a:hover .stepper__num { box-shadow: 0 0 0 4px var(--mint-tint); }
+
+/* 4. the steps */
+.timeline { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; position: relative; scroll-margin-top: 170px; }
+.step::before { /* the rail between the circles */
+  content: ""; position: absolute; left: 20px; top: 44px; bottom: -14px; width: 3px; background: var(--line);
+}
+.step:last-child::before { display: none; }
+.step.is-done::before { background: var(--mint); }
 
 .step__dot {
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 2px solid var(--muted); background: var(--card);
-  position: relative; z-index: 1; flex-shrink: 0;
-  display: grid; place-items: center; color: var(--ink); font-weight: 800;
-  transition: background .15s;
+  width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--muted); background: var(--card);
+  color: var(--heading); font-weight: 800; font-size: 1.05rem; position: relative; z-index: 1;
+  display: grid; place-items: center; transition: background .15s, transform .15s;
 }
-.step__dot:hover { background: var(--mint-tint); }
-.step__text { flex: 1; }
-.step__text h4 { font-size: 1.05rem; font-weight: 700; }
-.step__date { font-size: .9rem; color: var(--muted); }
-.step__check { color: var(--heading); font-size: 1.2rem; visibility: hidden; }
-
-/* done = mint dot with a dark tick (mint is decoration only) */
-.step.is-done .step__dot { background: var(--mint); border-color: var(--mint); }
+.step__dot:hover { background: var(--mint-tint); transform: scale(1.06); }
+.step.is-done .step__dot { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.step.is-done .step__num { display: none; }
 .step.is-done .step__dot::after { content: "✓"; }
-.step.is-done .step__check { visibility: visible; }
-/* current = soft mint-tint row */
-.step.is-current { background: var(--mint-tint); }
-.step.is-current .step__dot { border: 8px solid var(--midnight); }
+.step.is-current .step__dot { background: var(--midnight); border-color: var(--midnight); color: var(--on-dark); }
+
+.step__card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); min-width: 0; }
+.step.is-current .step__card { background: var(--mint-tint); border: 2px solid var(--midnight); }
+.step.is-done .step__card { border-color: var(--mint); }
+.step__title { margin: 0; font: inherit; }
+.step__head {
+  width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; padding: 14px 18px;
+  background: none; border: 0; color: inherit; border-radius: var(--radius);
+}
+.step__text { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.step__name { font-size: 1.1rem; font-weight: 800; color: var(--heading); line-height: 1.25; }
+.step__date { font-size: .92rem; color: var(--muted); }
+.step__status {
+  align-self: flex-start; border-radius: var(--pill); padding: 1px 12px; font-size: .78rem; font-weight: 800;
+  border: 1px solid var(--muted); background: var(--card); color: var(--heading);
+}
+.step.is-current .step__status { background: var(--midnight); border-color: var(--midnight); color: var(--on-dark); }
+.step.is-done .step__status { background: var(--mint); border-color: var(--mint); color: var(--ink); }
+.step__chev {
+  width: 11px; height: 11px; flex-shrink: 0; margin-right: 4px;
+  border-right: 3px solid var(--heading); border-bottom: 3px solid var(--heading); transform: rotate(45deg); transition: transform .2s;
+}
+.step__head[aria-expanded="true"] .step__chev { transform: rotate(-135deg); }
+@media (prefers-reduced-motion: reduce) { .step__chev, .step__dot { transition: none; } }
+
+.step__body { padding: 0 18px 18px; }
+.step__what { font-weight: 700; color: var(--heading); }
+.step__todo { margin: 10px 0 16px 1.2rem; display: flex; flex-direction: column; gap: 7px; font-size: .96rem; }
+.step__todo a { color: var(--green); text-decoration: underline; font-weight: 600; }
+.step__actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.step__source { margin-top: 14px; font-size: .85rem; color: var(--muted); }
+.step__source a { color: var(--green); text-decoration: underline; }
+.step.is-done .step__done { background: var(--card); color: var(--heading); border-color: var(--muted); }
 
 .note { font-size: .9rem; color: var(--muted); margin-top: 16px; }
 .note--box { background: var(--mint-tint); border-radius: 12px; padding: 14px 18px; }
@@ -759,7 +810,6 @@ body:has(dialog[open]) { overflow: hidden; }
     .hero--small { padding: 32px 0 56px; }
   .hero__content p br { display: none; }
   .card { padding: 24px 20px; }
-  .step { gap: 14px; padding-right: 16px; }
   .maison-grid { grid-template-columns: 1fr; }
   .maisons-page { padding-top: 48px; }
   .footer { margin-top: 64px; }
@@ -837,4 +887,20 @@ body:has(dialog[open]) { overflow: hidden; }
   .tabpanel__next .btn { width: 100%; justify-content: center; }
   .route__btn { width: 100%; justify-content: center; }
   .community-card .btn { width: 100%; justify-content: center; }
+}
+
+/* ===== Journey timeline: phone ===== */
+@media (max-width: 800px) {
+  .howto { grid-template-columns: minmax(0, 1fr); }
+  .step { grid-template-columns: 36px minmax(0, 1fr); gap: 10px; }
+  .step::before { left: 16px; top: 36px; }
+  .step__dot { width: 36px; height: 36px; font-size: .95rem; }
+  .step__head { padding: 12px 14px; }
+  .step__body { padding: 0 14px 16px; }
+  .step__actions .btn { width: 100%; justify-content: center; }
+  .stepper__num { width: 34px; height: 34px; }
+  .stepper li + li::before { top: 16px; }
+}
+@media (max-width: 520px) {
+  .stepper__label { display: none; }           /* numbers only; the step titles are right below */
 }
