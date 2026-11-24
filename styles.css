@@ -376,7 +376,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .step__body { padding: 0 18px 18px; }
 .step__what { font-weight: 700; color: var(--heading); }
 .step__todo { margin: 10px 0 16px 1.2rem; display: flex; flex-direction: column; gap: 7px; font-size: .96rem; }
-.step__todo a { color: var(--green); text-decoration: underline; font-weight: 600; }
+.step__todo a { color: var(--green); text-decoration: underline; font-weight: 600; overflow-wrap: anywhere; }
 .step__actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .step__source { margin-top: 14px; font-size: .85rem; color: var(--muted); }
 .step__source a { color: var(--green); text-decoration: underline; }
