@@ -1,6 +1,31 @@
 // MANI — app-style homepage: a sidebar and one step at a time.
 // Plain JavaScript, no libraries. All text is set with textContent (never innerHTML).
 
+// ===== Top bar (both pages): phone menu, and on the homepage it turns solid when you scroll past the photo =====
+(function () {
+  const bar = document.getElementById("topbar");
+  const btn = document.getElementById("menuBtn");
+  const nav = document.getElementById("topnav");
+  if (btn && nav) {
+    const close = (back) => { nav.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); if (back) btn.focus(); };
+    btn.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    nav.addEventListener("click", (e) => { if (e.target.closest("a")) close(false); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && nav.classList.contains("is-open")) close(true); });
+  }
+  const hero = document.getElementById("top");
+  if (bar && hero && bar.classList.contains("topbar--hero")) {
+    let wait = false;
+    const update = () => { wait = false; bar.classList.toggle("is-solid", window.scrollY > hero.offsetHeight - bar.offsetHeight - 8 || (nav && nav.classList.contains("is-open"))); };
+    window.addEventListener("scroll", () => { if (!wait) { wait = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener("resize", update);
+    if (btn) btn.addEventListener("click", update);
+    update();
+  }
+})();
+
 (function () {
   const nav = document.getElementById("stepsNav");
   if (!nav) return; // not the homepage
@@ -123,8 +148,9 @@
         if (t) { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); }
       }
       if (opts.scroll !== false) {
+        // bring the card to the top of the screen (also when you come down from the photo hero)
         const top = stage.getBoundingClientRect().top + window.scrollY - (window.innerWidth < 1000 ? 136 : 96);
-        if (window.scrollY > top) window.scrollTo({ top: Math.max(0, top), behavior: reduced() ? "auto" : "smooth" });
+        if (Math.abs(window.scrollY - top) > 8) window.scrollTo({ top: Math.max(0, top), behavior: reduced() ? "auto" : "smooth" });
       }
     });
     if (push) {
@@ -275,10 +301,19 @@
   if (first.length === 1) lastStep = first;
   render();
   if (isReturning() && first.length === 1) showWelcomeBack(first);
-  if (!fromHash && first !== "welcome") history.replaceState(null, "", "#" + CANON[first]);
+  // The big button in the photo hero: "Continue: Step X" for people who already started
+  const heroCta = $("#heroCta");
+  if (heroCta && isReturning()) {
+    const step = first.length === 1 ? first : lastStep;
+    heroCta.textContent = "Continue: Step " + step + " ";
+    const arrow = document.createElement("span");
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "→";
+    heroCta.appendChild(arrow);
+    heroCta.setAttribute("href", "#" + CANON[step]);
+  }
   window.addEventListener("load", moveGlide); // fonts can change the row heights
   window.addEventListener("resize", moveGlide);
-  if (fromHash && first !== "welcome") requestAnimationFrame(() => stage.scrollIntoView({ block: "start" }));
 })();
 
 // ===== Maisons page: search box filters the cards by name =====

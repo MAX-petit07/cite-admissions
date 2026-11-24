@@ -11,10 +11,10 @@
 </head>
 <body>
 
-  <!-- ============ TOP BAR (same as the homepage) ============ -->
-  <header class="topbar">
+  <!-- ============ TOP BAR (same as the homepage, solid) ============ -->
+  <header class="topbar" id="topbar">
     <div class="container topbar__inner">
-      <a href="index.html#welcome" class="logo" aria-label="MANI, back to the start">
+      <a href="index.html#top" class="logo" aria-label="MANI, back to the top">
         <!-- Simple placeholder icon (not the official CIUP logo) -->
         <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
@@ -22,12 +22,16 @@
           <path d="M24 15v29" />
           <path d="M4 44h40" />
         </svg>
-        <span class="logo__text"><strong>MANI</strong><small>A guide to applying to CIUP</small></span>
+        <span class="logo__text"><strong>MANI</strong></span>
       </a>
-      <nav class="topnav" aria-label="Main">
-        <a href="maisons.html" class="topnav__link is-active" aria-current="page">Houses</a>
-        <a href="index.html#faq" class="topnav__link">FAQ</a>
-      </nav>
+      <div class="topbar__right">
+        <nav class="topnav" id="topnav" aria-label="Main">
+          <a href="maisons.html" class="topnav__link is-active" aria-current="page">Houses</a>
+          <a href="index.html#faq" class="topnav__link">FAQ</a>
+        </nav>
+        <a href="index.html#who-can-apply" class="btn btn--mint btn--sm topbar__start">Start</a>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
     </div>
   </header>
 

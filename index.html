@@ -9,7 +9,8 @@
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" type="image/webp" href="images/cite-arch.webp" imagesrcset="images/cite-arch-900.webp 900w, images/cite-arch.webp 1600w" imagesizes="100vw" fetchpriority="high" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="app.css" />
 </head>
@@ -47,10 +48,10 @@
 
   <a class="skip" href="#content">Skip to content</a>
 
-  <!-- ============ TOP BAR: logo, Houses, FAQ ============ -->
-  <header class="topbar">
+  <!-- ============ TOP BAR: transparent on the photo, solid midnight once you scroll ============ -->
+  <header class="topbar topbar--hero" id="topbar">
     <div class="container topbar__inner">
-      <a href="index.html#welcome" class="logo" aria-label="MANI, back to the start">
+      <a href="index.html#top" class="logo" aria-label="MANI, back to the top">
         <!-- Simple placeholder icon (not the official CIUP logo) -->
         <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
@@ -58,14 +59,40 @@
           <path d="M24 15v29" />
           <path d="M4 44h40" />
         </svg>
-        <span class="logo__text"><strong>MANI</strong><small>A guide to applying to CIUP</small></span>
+        <span class="logo__text"><strong>MANI</strong></span>
       </a>
-      <nav class="topnav" aria-label="Main">
-        <a href="maisons.html" class="topnav__link">Houses</a>
-        <a href="#faq" class="topnav__link" data-view-link="faq">FAQ</a>
-      </nav>
+      <div class="topbar__right">
+        <nav class="topnav" id="topnav" aria-label="Main">
+          <a href="maisons.html" class="topnav__link">Houses</a>
+          <a href="#faq" class="topnav__link" data-view-link="faq">FAQ</a>
+        </nav>
+        <a href="#who-can-apply" class="btn btn--mint btn--sm topbar__start">Start</a>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
     </div>
   </header>
+
+  <!-- ============ HERO: campus photo ============ -->
+  <section class="herophoto" id="top" aria-labelledby="hero-title">
+    <picture class="herophoto__pic">
+      <source type="image/webp" srcset="images/cite-arch-900.webp 900w, images/cite-arch.webp 1600w" sizes="100vw" />
+      <img src="images/cite-arch.jpg" width="1600" height="2133" fetchpriority="high" decoding="async" alt="Two students walking through a stone archway towards the Maison internationale at the Cité internationale universitaire de Paris" />
+    </picture>
+    <div class="herophoto__shade" aria-hidden="true"></div>
+    <div class="container herophoto__inner">
+      <h1 id="hero-title"><span class="herophoto__a">Applying to CIUP</span><span class="herophoto__b">in clear English</span></h1>
+      <p class="herophoto__line">Your step-by-step guide to student housing at the Cité internationale universitaire de Paris.</p>
+      <a href="#who-can-apply" class="btn btn--lg herophoto__cta" id="heroCta">Start in 4 steps <span aria-hidden="true">→</span></a>
+    </div>
+    <nav class="container herosteps" aria-label="The 4 steps">
+      <ol>
+        <li><a href="#who-can-apply">1 · Can I apply?</a></li>
+        <li><a href="#how-it-works">2 · My route</a></li>
+        <li><a href="#key-facts">3 · Prepare and apply</a></li>
+        <li><a href="#plan-b">4 · Wait and Plan B</a></li>
+      </ol>
+    </nav>
+  </section>
 
   <!-- Phone and tablet: a compact bar that opens the list of steps (hidden on desktop) -->
   <div class="mobilebar" id="mobilebar" hidden>
@@ -142,7 +169,7 @@
         <div class="welcome">
           <div class="welcome__text">
             <p class="eyebrow">For international students applying to CIUP</p>
-            <h1 id="welcome-title">Your CIUP application, one step at a time</h1>
+            <h2 class="welcome__title" id="welcome-title">Your CIUP application, one step at a time</h2>
             <p class="lead">4 short steps in plain English. Every fact links to the official CIUP website.</p>
             <div class="welcome__cta">
               <a href="#who-can-apply" class="btn btn--mint btn--lg" data-go="1">Start with Step 1 <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
