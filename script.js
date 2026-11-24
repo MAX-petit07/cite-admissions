@@ -1,321 +1,284 @@
-// ===== Fade-up when sections scroll into view =====
-// If the visitor prefers reduced motion (or the browser is old), everything is shown at once.
-try {
-  const items = document.querySelectorAll(".reveal");
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce || !("IntersectionObserver" in window)) {
-    items.forEach((el) => el.classList.add("is-visible"));
-  } else {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target); // animate only once
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-    items.forEach((el) => io.observe(el));
-  }
-} catch (e) {
-  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-}
+// MANI — app-style homepage: a sidebar and one step at a time.
+// Plain JavaScript, no libraries. All text is set with textContent (never innerHTML).
 
-// ===== Mobile menu =====
-document.getElementById("menuBtn").addEventListener("click", () => {
-  document.getElementById("nav").classList.toggle("is-open");
-});
-
-// ===== Timeline ("My progress"): open a step, tick it off, saved in the browser =====
-const STORAGE_KEY = "citeAdmissionsProgress";
-const steps = document.querySelectorAll(".step");
-
-function loadProgress() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveProgress(doneIds) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(doneIds));
-  } catch {
-    /* storage not available: progress just won't be saved */
-  }
-}
-
-let done = loadProgress();
-
-// The little "2/5" badge on the "My progress" tab (homepage only)
-const progressBadge = document.getElementById("progressBadge");
-const progressBadgeText = document.getElementById("progressBadgeText");
-function updateProgressBadge() {
-  if (!progressBadge) return;
-  const ids = Array.from(steps).map((s) => s.dataset.id);
-  const n = done.filter((id) => ids.includes(id)).length;
-  const all = ids.length > 0 && n === ids.length;
-  progressBadge.textContent = all ? "✓" : n + "/" + ids.length; // ✓ when everything is ticked
-  if (progressBadgeText) progressBadgeText.textContent = all ? "All " + ids.length + " steps done" : n + " of " + ids.length + " steps done";
-}
-
-const stepList = Array.from(steps);
-const stepperItems = document.querySelectorAll(".stepper li");
-const journeyBar = document.getElementById("journeyBar");
-const journeyText = document.getElementById("journeyText");
-const journeyLive = document.getElementById("journeyLive");
-const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-const stepTitle = (step) => step.querySelector(".step__name").textContent;
-const currentStep = () => stepList.find((s) => !done.includes(s.dataset.id)) || null; // first step not done = "you are here"
-
-// Redraw everything that depends on which steps are done
-function render() {
-  const total = stepList.length;
-  const doneCount = stepList.filter((s) => done.includes(s.dataset.id)).length;
-  const current = currentStep();
-
-  stepList.forEach((step, i) => {
-    const isDone = done.includes(step.dataset.id);
-    const isCurrent = current === step;
-    step.classList.toggle("is-done", isDone);
-    step.classList.toggle("is-current", isCurrent);
-    step.querySelector(".step__date").dataset.status = isDone ? "done" : "";
-    step.querySelector(".step__status").textContent = isDone ? "Done" : isCurrent ? "You are here" : "Up next";
-    const dot = step.querySelector(".step__dot");
-    dot.setAttribute("aria-pressed", String(isDone));
-    dot.setAttribute("aria-label", (isDone ? "Step " + (i + 1) + " is done. Press to undo: " : "Mark step " + (i + 1) + " as done: ") + stepTitle(step));
-    const btn = step.querySelector(".step__done");
-    if (btn) btn.textContent = isDone ? "Done ✓ Undo" : "Mark as done";
-  });
-
-  stepperItems.forEach((li, i) => {
-    const step = stepList[i];
-    if (!step) return;
-    const isDone = done.includes(step.dataset.id);
-    li.classList.toggle("is-done", isDone);
-    li.classList.toggle("is-current", current === step);
-    li.querySelector(".stepper__num").textContent = isDone ? "✓" : String(i + 1);
-    li.querySelector("a").setAttribute("aria-label", "Step " + (i + 1) + ": " + stepTitle(step) + (isDone ? " (done)" : current === step ? " (you are here)" : ""));
-  });
-
-  if (journeyBar) {
-    journeyBar.style.width = (total ? (doneCount / total) * 100 : 0) + "%";
-    journeyBar.parentElement.setAttribute("aria-valuenow", String(doneCount));
-  }
-  if (journeyText) {
-    journeyText.textContent = current
-      ? doneCount + " of " + total + " steps done · You are here: step " + (stepList.indexOf(current) + 1) + ", " + stepTitle(current)
-      : "All " + total + " steps ticked. This is your own checklist: it doesn't change anything in your real application.";
-  }
-  updateProgressBadge();
-}
-
-// Open one step (and close the others), like an accordion
-function openOnly(id) {
-  stepList.forEach((step) => {
-    const open = step.dataset.id === id;
-    step.querySelector(".step__head").setAttribute("aria-expanded", String(open));
-    step.querySelector(".step__body").hidden = !open;
-  });
-}
-function showStep(step) {
-  openOnly(step.dataset.id);
-  step.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-}
-function announce(text) {
-  if (journeyLive) journeyLive.textContent = text;
-}
-
-// Tick or un-tick a step
-function toggleDone(step) {
-  const id = step.dataset.id;
-  const wasDone = done.includes(id);
-  done = wasDone ? done.filter((d) => d !== id) : [...done, id];
-  saveProgress(done);
-  render();
-  const n = stepList.indexOf(step) + 1;
-  if (wasDone) {
-    openOnly(id);
-    announce("Step " + n + " marked as not done.");
-  } else {
-    const next = currentStep();
-    if (next) {
-      announce("Step " + n + " done. Next: " + stepTitle(next) + ".");
-      showStep(next); // open the next step so it is obvious what to do now
-    } else {
-      openOnly(null);
-      announce("Step " + n + " done. All steps are ticked.");
-    }
-  }
-}
-
-stepList.forEach((step) => {
-  step.querySelector(".step__dot").addEventListener("click", () => toggleDone(step));
-  const doneBtn = step.querySelector(".step__done");
-  if (doneBtn) doneBtn.addEventListener("click", () => toggleDone(step));
-  const head = step.querySelector(".step__head");
-  head.addEventListener("click", () => {
-    if (head.getAttribute("aria-expanded") === "true") openOnly(null);
-    else openOnly(step.dataset.id);
-  });
-});
-
-// The numbered stepper jumps to a step; "Go to my current step" jumps to the one you are on
-stepperItems.forEach((li, i) => {
-  const a = li.querySelector("a");
-  if (a && stepList[i]) a.addEventListener("click", (e) => { e.preventDefault(); showStep(stepList[i]); });
-});
-const jumpBtn = document.getElementById("journeyJump");
-if (jumpBtn) {
-  jumpBtn.addEventListener("click", () => {
-    const cur = currentStep() || stepList[stepList.length - 1];
-    if (cur) showStep(cur);
-  });
-}
-
-if (stepList.length) {
-  render();
-  const cur = currentStep();
-  openOnly(cur ? cur.dataset.id : null); // first visit: the step to do now is already open (without JavaScript every step stays readable)
-}
-
-// ===== Homepage: one card with four tabs =====
-// Without JavaScript every panel simply shows one after another (the tab bar stays hidden).
 (function () {
-  const hub = document.getElementById("hub");
-  if (!hub) return; // only the homepage has the hub
+  const nav = document.getElementById("stepsNav");
+  if (!nav) return; // not the homepage
 
-  const tablist = hub.querySelector('[role="tablist"]');
-  const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
-  const ids = tabs.map((t) => t.getAttribute("aria-controls"));
-  const panels = ids.map((id) => document.getElementById(id));
-  const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const behavior = () => (reduceMotion() ? "auto" : "smooth");
-  let current = null;
+  // ---------- saved state (the same key the old timeline used, so current users keep their ticks) ----------
+  const KEY = "citeAdmissionsProgress"; // list of finished steps: "1".."4"
+  const CHK = "maniChecklist";          // ticked checklist items
+  const CUR = "maniStep";               // the step you were on
+  const store = {
+    get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v === null || v === undefined ? d : v; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked: the app still works for this visit */ } },
+    del(k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } },
+  };
+  // Old timeline ids -> new step numbers
+  const OLD = { eligibility: "1", submit: "3", response: "4" };
+  const migrate = (list) => {
+    if (!Array.isArray(list)) return [];
+    const out = [];
+    list.forEach((id) => { const n = OLD[id] || id; if (["1", "2", "3", "4"].includes(n) && !out.includes(n)) out.push(n); });
+    return out;
+  };
+  let done = migrate(store.get(KEY, []));
+  if (JSON.stringify(done) !== JSON.stringify(store.get(KEY, []))) store.set(KEY, done);
+  let checks = store.get(CHK, []);
+  if (!Array.isArray(checks)) checks = [];
 
-  panels.forEach((p) => p.setAttribute("tabindex", "-1")); // so a panel can receive focus from a link or "Next"
+  // ---------- page parts ----------
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const views = {};
+  $$(".view").forEach((v) => { views[v.dataset.view] = v; });
+  const navBtns = $$(".nav-step");
+  const glide = $("#glide");
+  const stage = $("#content");
+  const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // On a phone the tab bar scrolls sideways: keep the chosen tab in view
-  function revealTab(tab) {
-    if (tablist.scrollWidth <= tablist.clientWidth) return;
-    const left = tab.offsetLeft - (tablist.clientWidth - tab.offsetWidth) / 2;
-    tablist.scrollTo({ left: Math.max(0, left), behavior: behavior() });
+  // Address (#hash) <-> view
+  const HASH = { welcome: "welcome", "who-can-apply": "1", "how-it-works": "2", "key-facts": "3", guide: "3", "plan-b": "4", planb: "4", faq: "faq" };
+  const CANON = { welcome: "welcome", 1: "who-can-apply", 2: "how-it-works", 3: "key-facts", 4: "plan-b", faq: "faq" };
+  const viewFromHash = (h) => HASH[(h || "").replace(/^#/, "")] || null;
+
+  let current = "welcome";
+  let lastStep = "1"; // where "Back" from the FAQ returns to
+
+  const isReturning = () => done.length > 0 || checks.length > 0 || ["1", "2", "3", "4"].includes(store.get(CUR, "welcome"));
+
+  // ---------- drawing the state ----------
+  const setBar = (el, n) => { el.setAttribute("aria-valuenow", String(n)); el.firstElementChild.style.setProperty("--p", String(n / 4)); };
+  const STATE = { done: "Done", current: "Current step", todo: "Not done yet" };
+
+  function moveGlide() {
+    const row = current >= "1" && current <= "4" && current.length === 1 ? navBtns[Number(current) - 1].parentElement : null;
+    if (!row) { glide.style.opacity = "0"; return; }
+    glide.style.height = row.offsetHeight + "px";
+    glide.style.setProperty("--y", row.offsetTop + "px");
+    glide.style.opacity = "1";
   }
 
-  function scrollToHub() {
-    hub.scrollIntoView({ behavior: behavior(), block: "start" });
+  function render() {
+    navBtns.forEach((b) => {
+      const n = b.dataset.step;
+      const isDone = done.includes(n);
+      b.classList.toggle("is-done", isDone);
+      if (n === current) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      $(".nav-step__state", b).textContent = (isDone ? STATE.done : n === current ? STATE.current : STATE.todo) + (isDone && n === current ? ", current step" : "");
+    });
+    setBar($("#sideBar"), done.length);
+    setBar($("#mobileBar"), done.length);
+    $("#sideCount").textContent = done.length === 4 ? "All 4 done ✓" : done.length + " of 4 done";
+    const label = $("#mobileLabel");
+    if (current >= "1" && current <= "4" && current.length === 1) label.textContent = "Step " + current + " of 4 · " + $(".nav-step__title", navBtns[Number(current) - 1]).textContent;
+    else if (current === "faq") label.textContent = "Quick answers · " + done.length + " of 4 done";
+    else label.textContent = "Your application · " + done.length + " of 4 done";
+    moveGlide();
+
+    // checklist status (also the empty state)
+    const n = checks.length;
+    $("#clStatus").textContent = n === 0 ? "Nothing ticked yet. Start with your ID copy." : n === 4 ? "All ticked. Next: tell us when you've applied." : n + " of 4 ready";
+
+    // step 4 message
+    const banner = $("#allDone");
+    if (done.includes("4")) {
+      const all = done.length === 4;
+      $(".alldone__title", banner).textContent = all ? "You're all set! Keep an eye on your email." : "Step 4 is marked as done.";
+      $("p:not(.alldone__title)", banner).textContent = all
+        ? "This only finishes your checklist, not your application."
+        : "Some earlier steps are still open. You can open them from the list. This is only your own checklist, not your application.";
+      banner.hidden = false;
+    } else banner.hidden = true;
   }
 
-  // Open one tab and hide the others
-  function select(id, opts) {
-    opts = opts || {};
-    const index = ids.indexOf(id);
-    if (index < 0) return;
-    const changed = current !== id;
-    tabs.forEach((t, i) => {
-      t.setAttribute("aria-selected", String(i === index));
-      t.tabIndex = i === index ? 0 : -1; // only the selected tab is reachable with Tab
-    });
-    panels.forEach((p, i) => {
-      p.hidden = i !== index;
-      p.classList.remove("is-entering");
-    });
-    if (changed && current !== null && !reduceMotion()) {
-      const p = panels[index];
-      void p.offsetWidth; // restart the short fade-up
-      p.classList.add("is-entering");
+  // ---------- changing step ----------
+  function swap(fn) {
+    if (!reduced() && document.startViewTransition) {
+      const t = document.startViewTransition(fn);
+      // a quick second click skips the first transition: that is fine, so we silence the browser's "skipped" errors
+      [t.ready, t.finished, t.updateCallbackDone].forEach((p) => p && p.catch(() => {}));
+      return;
     }
-    current = id;
-    revealTab(tabs[index]);
-    if (opts.hash !== false) {
-      const h = typeof opts.hash === "string" ? opts.hash : "#" + id;
-      try { history.replaceState(null, "", location.pathname + location.search + h); } catch (e) { /* not important */ }
+    fn();
+    if (!reduced()) {
+      const v = views[current];
+      v.classList.add("is-entering");
+      v.addEventListener("animationend", () => v.classList.remove("is-entering"), { once: true });
     }
-    if (opts.focus === "tab") tabs[index].focus();
-    if (opts.focus === "panel") panels[index].focus({ preventScroll: true });
-    if (opts.scroll === "hub") scrollToHub();
-    if (opts.scroll === "target" && opts.target) opts.target.scrollIntoView({ behavior: behavior(), block: "start" });
   }
 
-  // "#guide", "#planb"... -> which panel (and which element inside it)?
-  function resolve(hash) {
-    let id = "";
-    try { id = decodeURIComponent(String(hash || "").replace(/^#/, "")); } catch (e) { return null; }
-    if (!id) return null;
-    if (ids.includes(id)) return { panelId: id, target: null };
-    const el = document.getElementById(id);
-    const panel = el && el.closest(".tabpanel");
-    return panel ? { panelId: panel.id, target: el } : null;
-  }
-
-  // Clicking a tab
-  tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => {
-      select(ids[i], { focus: "tab" });
-      if (hub.getBoundingClientRect().top < 0) scrollToHub(); // you had scrolled past the top: bring the panel back
+  function show(view, opts = {}) {
+    if (!views[view]) view = "welcome";
+    const push = opts.push !== false;
+    closeSheet(false);
+    hideWelcomeBack();
+    swap(() => {
+      Object.keys(views).forEach((k) => views[k].classList.toggle("is-active", k === view));
+      current = view;
+      if (view.length === 1) { lastStep = view; store.set(CUR, view); }
+      render();
+      if (opts.focus !== false) {
+        const t = $(".view__title, h1", views[view]);
+        if (t) { t.setAttribute("tabindex", "-1"); t.focus({ preventScroll: true }); }
+      }
+      if (opts.scroll !== false) {
+        const top = stage.getBoundingClientRect().top + window.scrollY - (window.innerWidth < 1000 ? 136 : 96);
+        if (window.scrollY > top) window.scrollTo({ top: Math.max(0, top), behavior: reduced() ? "auto" : "smooth" });
+      }
     });
-  });
+    if (push) {
+      const h = "#" + CANON[view];
+      if (location.hash !== h) history.pushState(null, "", h);
+    }
+  }
 
-  // Arrow keys, Home and End move between tabs
-  tablist.addEventListener("keydown", (e) => {
-    const i = tabs.indexOf(document.activeElement);
-    if (i < 0) return;
-    let n = null;
-    if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
-    else if (e.key === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
-    else if (e.key === "Home") n = 0;
-    else if (e.key === "End") n = tabs.length - 1;
-    if (n === null) return;
-    e.preventDefault();
-    select(ids[n], { focus: "tab" });
-  });
+  // ---------- marking steps done ----------
+  function markDone(n) {
+    if (done.includes(n)) return;
+    done.push(n);
+    done.sort();
+    store.set(KEY, done);
+    const b = navBtns[Number(n) - 1];
+    b.classList.add("just-done");
+    $(".nav-step__mark", b).addEventListener("animationend", () => b.classList.remove("just-done"), { once: true });
+    if (done.length === 4) setTimeout(confetti, 150);
+  }
 
-  // "Next: ..." buttons
-  hub.querySelectorAll("[data-goto]").forEach((b) => {
-    b.addEventListener("click", () => select(b.dataset.goto, { focus: "panel", scroll: "hub" }));
-  });
-
-  // Any link to one of the panels (hero buttons, the question rows, the menu, ...) opens its tab
-  const clean = (p) => p.replace(/index\.html$/, "");
   document.addEventListener("click", (e) => {
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    const a = e.target.closest("a[href]");
-    if (!a || a.target === "_blank") return;
-    const url = new URL(a.href, location.href);
-    if (!url.hash || url.origin !== location.origin || clean(url.pathname) !== clean(location.pathname)) return;
-    const hit = resolve(url.hash);
-    if (!hit) return;
-    e.preventDefault();
-    select(hit.panelId, { hash: url.hash, focus: "panel", scroll: hit.target ? "target" : "hub", target: hit.target });
-    const nav = document.getElementById("nav");
-    if (nav) nav.classList.remove("is-open"); // close the phone menu
+    const next = e.target.closest("[data-next]");
+    if (next) {
+      const n = next.dataset.next;
+      markDone(n);
+      if (n === "4") { render(); const b = $("#allDone"); if (b && !b.hidden) b.scrollIntoView({ block: "center", behavior: reduced() ? "auto" : "smooth" }); }
+      else show(String(Number(n) + 1));
+      return;
+    }
+    if (e.target.closest("[data-back]")) {
+      if (current === "faq") show(isReturning() ? lastStep : "welcome");
+      else show(current === "1" ? "welcome" : String(Number(current) - 1));
+      return;
+    }
+    const step = e.target.closest(".nav-step");
+    if (step) { show(step.dataset.step); return; }
+
+    // any link that points at a view (chips, the welcome button, FAQ in the top bar, links from other pages' hashes)
+    const a = e.target.closest("a[href^='#']");
+    if (a && !e.defaultPrevented && e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) {
+      const v = viewFromHash(a.getAttribute("href"));
+      if (v) { e.preventDefault(); show(v); }
+    }
   });
 
-  // Back / forward, or someone editing the address
-  window.addEventListener("hashchange", () => {
-    const hit = resolve(location.hash);
-    if (hit) select(hit.panelId, { hash: false, scroll: hit.target ? "target" : "hub", target: hit.target });
+  window.addEventListener("popstate", () => { const v = viewFromHash(location.hash); show(v || "welcome", { push: false }); });
+  window.addEventListener("hashchange", () => { const v = viewFromHash(location.hash); if (v && v !== current) show(v, { push: false }); });
+
+  // ---------- checklist ----------
+  $$("[data-check]").forEach((box) => {
+    box.checked = checks.includes(box.dataset.check);
+    box.addEventListener("change", () => {
+      checks = $$("[data-check]").filter((b) => b.checked).map((b) => b.dataset.check);
+      store.set(CHK, checks);
+      render();
+    });
   });
 
-  // Opening the page: show the tab named in the address, or the first one
-  const first = resolve(location.hash);
-  select(first ? first.panelId : ids[0], { hash: false });
-  if (first) {
-    // jump (no animation) so the page opens right on the hub
-    const jump = () => (first.target || hub).scrollIntoView({ behavior: "auto", block: "start" });
-    let userScrolled = false;
-    const mark = () => { userScrolled = true; };
-    window.addEventListener("wheel", mark, { once: true, passive: true });
-    window.addEventListener("touchmove", mark, { once: true, passive: true });
-    window.addEventListener("keydown", mark, { once: true });
-    requestAnimationFrame(jump);
-    // web fonts and images can shift the layout a little after the first jump: re-aim once, unless the visitor already moved
-    window.addEventListener("load", () => { if (!userScrolled) jump(); });
+  // ---------- returning visitor ----------
+  const wb = $("#welcomeBack");
+  function showWelcomeBack(step) {
+    $("#wbText").textContent = done.length === 4 ? "Welcome back! All 4 steps are done." : "Welcome back, you're on Step " + step + ". Keep going!";
+    $("#wbConfirm").hidden = true;
+    $("#wbActions").hidden = false;
+    wb.hidden = false;
   }
+  function hideWelcomeBack() { wb.hidden = true; }
+  $("#startOver").addEventListener("click", () => { $("#wbActions").hidden = true; $("#wbConfirm").hidden = false; $("#startOverYes").focus(); $("#wbText").textContent = "Start over?"; });
+  $("#startOverNo").addEventListener("click", () => { $("#wbConfirm").hidden = true; $("#wbActions").hidden = false; $("#wbText").textContent = "Welcome back, you're on Step " + current + ". Keep going!"; $("#startOver").focus(); });
+  $("#startOverYes").addEventListener("click", () => {
+    done = []; checks = [];
+    store.del(KEY); store.del(CHK); store.del(CUR);
+    $$("[data-check]").forEach((b) => { b.checked = false; });
+    show("welcome");
+  });
+
+  // ---------- phone: bottom sheet ----------
+  const sheet = $("#sidebar");
+  const sheetBtn = $("#sheetBtn");
+  const backdrop = $("#sheetBackdrop");
+  const small = window.matchMedia("(max-width: 999px)");
+  $("#mobilebar").hidden = false;
+  function setInert() { if (small.matches && !sheet.classList.contains("is-open")) sheet.setAttribute("inert", ""); else sheet.removeAttribute("inert"); }
+  function openSheet() {
+    sheet.classList.add("is-open");
+    sheet.removeAttribute("inert");
+    backdrop.hidden = false;
+    requestAnimationFrame(() => backdrop.classList.add("is-shown"));
+    sheetBtn.setAttribute("aria-expanded", "true");
+    moveGlide();
+    setTimeout(() => (navBtns.find((b) => b.getAttribute("aria-current")) || navBtns[0]).focus(), 50);
+  }
+  function closeSheet(returnFocus) {
+    if (!sheet.classList.contains("is-open")) return;
+    sheet.classList.remove("is-open");
+    backdrop.classList.remove("is-shown");
+    setTimeout(() => { backdrop.hidden = true; }, 300);
+    sheetBtn.setAttribute("aria-expanded", "false");
+    setInert();
+    if (returnFocus) sheetBtn.focus();
+  }
+  sheetBtn.addEventListener("click", () => (sheet.classList.contains("is-open") ? closeSheet(true) : openSheet()));
+  $("#sheetClose").addEventListener("click", () => closeSheet(true));
+  backdrop.addEventListener("click", () => closeSheet(true));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && sheet.classList.contains("is-open")) closeSheet(true); });
+  small.addEventListener("change", () => { closeSheet(false); setInert(); });
+  setInert();
+
+  // ---------- confetti: a short burst in our colours (hand-written, about 1 second) ----------
+  function confetti() {
+    if (reduced()) return;
+    const cv = $("#confetti");
+    const ctx = cv.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const W = (cv.width = innerWidth * dpr), H = (cv.height = innerHeight * dpr);
+    const css = getComputedStyle(document.documentElement);
+    const colors = ["--mint", "--midnight", "--green", "--mint"].map((v) => css.getPropertyValue(v).trim());
+    const bits = Array.from({ length: 90 }, (_, i) => ({
+      x: W / 2 + (Math.random() - .5) * W * .25, y: H * .62,
+      vx: (Math.random() - .5) * 14 * dpr, vy: -(6 + Math.random() * 12) * dpr,
+      w: (6 + Math.random() * 6) * dpr, h: (4 + Math.random() * 5) * dpr,
+      r: Math.random() * 6, vr: (Math.random() - .5) * .4, c: colors[i % colors.length],
+    }));
+    const t0 = performance.now();
+    (function frame(t) {
+      const k = (t - t0) / 1100;
+      ctx.clearRect(0, 0, W, H);
+      if (k >= 1) return;
+      ctx.globalAlpha = k < .6 ? 1 : 1 - (k - .6) / .4;
+      bits.forEach((b) => {
+        b.vy += .5 * dpr; b.x += b.vx; b.y += b.vy; b.r += b.vr; b.vx *= .99;
+        ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.r); ctx.fillStyle = b.c; ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h); ctx.restore();
+      });
+      requestAnimationFrame(frame);
+    })(t0);
+  }
+
+  // ---------- opening the page ----------
+  const fromHash = viewFromHash(location.hash);
+  let first;
+  if (fromHash) first = fromHash;
+  else if (isReturning()) {
+    const saved = store.get(CUR, null);
+    first = ["1", "2", "3", "4"].includes(saved) ? saved : (["1", "2", "3", "4"].find((n) => !done.includes(n)) || "4");
+  } else first = "welcome";
+  Object.keys(views).forEach((k) => views[k].classList.toggle("is-active", k === first));
+  current = first;
+  if (first.length === 1) lastStep = first;
+  render();
+  if (isReturning() && first.length === 1) showWelcomeBack(first);
+  if (!fromHash && first !== "welcome") history.replaceState(null, "", "#" + CANON[first]);
+  window.addEventListener("load", moveGlide); // fonts can change the row heights
+  window.addEventListener("resize", moveGlide);
+  if (fromHash && first !== "welcome") requestAnimationFrame(() => stage.scrollIntoView({ block: "start" }));
 })();
 
 // ===== Maisons page: search box filters the cards by name =====

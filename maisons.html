@@ -11,10 +11,10 @@
 </head>
 <body>
 
-  <!-- ============ HEADER (same as homepage; links point back to index.html) ============ -->
-  <header class="header">
-    <div class="container header__inner">
-      <a href="index.html" class="logo">
+  <!-- ============ TOP BAR (same as the homepage) ============ -->
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a href="index.html#welcome" class="logo" aria-label="MANI, back to the start">
         <!-- Simple placeholder icon (not the official CIUP logo) -->
         <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
@@ -22,36 +22,20 @@
           <path d="M24 15v29" />
           <path d="M4 44h40" />
         </svg>
-        <span class="logo__text">
-          <strong>MANI</strong>
-          <small>A guide to applying to CIUP</small>
-        </span>
+        <span class="logo__text"><strong>MANI</strong><small>A guide to applying to CIUP</small></span>
       </a>
-
-      <nav class="nav" id="nav">
-        <a href="index.html" class="nav__link">Home</a>
-        <a href="index.html#how-it-works" class="nav__link">How to apply</a>
-        <a href="index.html#guide" class="nav__link">My progress</a>
-        <a href="maisons.html" class="nav__link is-active">Maisons</a>
-        <a href="index.html#who-can-apply" class="nav__link">Eligibility</a>
-        <a href="index.html#faq" class="nav__link">FAQ</a>
+      <nav class="topnav" aria-label="Main">
+        <a href="maisons.html" class="topnav__link is-active" aria-current="page">Houses</a>
+        <a href="index.html#faq" class="topnav__link">FAQ</a>
       </nav>
-
-      <div class="header__actions">
-        <select class="lang" aria-label="Language">
-          <option>EN</option>
-          <option>FR</option>
-          <option>ES</option>
-        </select>
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-      </div>
     </div>
   </header>
 
   <!-- ============ PAGE TITLE BANNER ============ -->
   <section class="hero hero--small">
     <div class="container hero__content">
-      <h1>Explore the Maisons</h1>
+      <a class="back-link" href="index.html">← Back to my application</a>
+      <h1>Explore the Maisons (houses)</h1>
       <p>All the houses listed on the official CIUP website.</p>
     </div>
   </section>
@@ -286,7 +270,7 @@
     </div>
   </footer>
 
-  <!-- Same script: it opens the phone menu (the other parts only run on the homepage) -->
+  <!-- script.js: the search box above -->
   <script src="script.js"></script>
 </body>
 </html>
