@@ -180,7 +180,7 @@ if (jumpBtn) {
 if (stepList.length) {
   render();
   const cur = currentStep();
-  if (cur) openOnly(cur.dataset.id); // first visit: the step to do now is already open
+  openOnly(cur ? cur.dataset.id : null); // first visit: the step to do now is already open (without JavaScript every step stays readable)
 }
 
 // ===== Homepage: one card with five tabs =====
