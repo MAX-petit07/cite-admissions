@@ -28,7 +28,7 @@ document.getElementById("menuBtn").addEventListener("click", () => {
   document.getElementById("nav").classList.toggle("is-open");
 });
 
-// ===== Timeline: tick off steps, saved in the browser =====
+// ===== Timeline ("My progress"): open a step, tick it off, saved in the browser =====
 const STORAGE_KEY = "citeAdmissionsProgress";
 const steps = document.querySelectorAll(".step");
 
@@ -44,7 +44,7 @@ function saveProgress(doneIds) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(doneIds));
   } catch {
-    /* storage not available — progress just won't be saved */
+    /* storage not available: progress just won't be saved */
   }
 }
 
@@ -62,30 +62,126 @@ function updateProgressBadge() {
   if (progressBadgeText) progressBadgeText.textContent = all ? "All " + ids.length + " steps done" : n + " of " + ids.length + " steps done";
 }
 
+const stepList = Array.from(steps);
+const stepperItems = document.querySelectorAll(".stepper li");
+const journeyBar = document.getElementById("journeyBar");
+const journeyText = document.getElementById("journeyText");
+const journeyLive = document.getElementById("journeyLive");
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const stepTitle = (step) => step.querySelector(".step__name").textContent;
+const currentStep = () => stepList.find((s) => !done.includes(s.dataset.id)) || null; // first step not done = "you are here"
+
+// Redraw everything that depends on which steps are done
 function render() {
-  let currentFound = false;
-  steps.forEach((step) => {
+  const total = stepList.length;
+  const doneCount = stepList.filter((s) => done.includes(s.dataset.id)).length;
+  const current = currentStep();
+
+  stepList.forEach((step, i) => {
     const isDone = done.includes(step.dataset.id);
+    const isCurrent = current === step;
     step.classList.toggle("is-done", isDone);
-    step.querySelector(".step__date").dataset.status = isDone ? "done" : "";
-    // The first step that isn't done is the "current" one
-    const isCurrent = !isDone && !currentFound;
-    if (isCurrent) currentFound = true;
     step.classList.toggle("is-current", isCurrent);
+    step.querySelector(".step__date").dataset.status = isDone ? "done" : "";
+    step.querySelector(".step__status").textContent = isDone ? "Done" : isCurrent ? "You are here" : "Up next";
+    const dot = step.querySelector(".step__dot");
+    dot.setAttribute("aria-pressed", String(isDone));
+    dot.setAttribute("aria-label", (isDone ? "Step " + (i + 1) + " is done. Press to undo: " : "Mark step " + (i + 1) + " as done: ") + stepTitle(step));
+    const btn = step.querySelector(".step__done");
+    if (btn) btn.textContent = isDone ? "Done ✓ Undo" : "Mark as done";
   });
+
+  stepperItems.forEach((li, i) => {
+    const step = stepList[i];
+    if (!step) return;
+    const isDone = done.includes(step.dataset.id);
+    li.classList.toggle("is-done", isDone);
+    li.classList.toggle("is-current", current === step);
+    li.querySelector(".stepper__num").textContent = isDone ? "✓" : String(i + 1);
+    li.querySelector("a").setAttribute("aria-label", "Step " + (i + 1) + ": " + stepTitle(step) + (isDone ? " (done)" : current === step ? " (you are here)" : ""));
+  });
+
+  if (journeyBar) {
+    journeyBar.style.width = (total ? (doneCount / total) * 100 : 0) + "%";
+    journeyBar.parentElement.setAttribute("aria-valuenow", String(doneCount));
+  }
+  if (journeyText) {
+    journeyText.textContent = current
+      ? doneCount + " of " + total + " steps done · You are here: step " + (stepList.indexOf(current) + 1) + ", " + stepTitle(current)
+      : "All " + total + " steps ticked. This is your own checklist: it doesn't change anything in your real application.";
+  }
   updateProgressBadge();
 }
 
-steps.forEach((step) => {
-  step.querySelector(".step__dot").addEventListener("click", () => {
-    const id = step.dataset.id;
-    done = done.includes(id) ? done.filter((d) => d !== id) : [...done, id];
-    saveProgress(done);
-    render();
+// Open one step (and close the others), like an accordion
+function openOnly(id) {
+  stepList.forEach((step) => {
+    const open = step.dataset.id === id;
+    step.querySelector(".step__head").setAttribute("aria-expanded", String(open));
+    step.querySelector(".step__body").hidden = !open;
+  });
+}
+function showStep(step) {
+  openOnly(step.dataset.id);
+  step.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+}
+function announce(text) {
+  if (journeyLive) journeyLive.textContent = text;
+}
+
+// Tick or un-tick a step
+function toggleDone(step) {
+  const id = step.dataset.id;
+  const wasDone = done.includes(id);
+  done = wasDone ? done.filter((d) => d !== id) : [...done, id];
+  saveProgress(done);
+  render();
+  const n = stepList.indexOf(step) + 1;
+  if (wasDone) {
+    openOnly(id);
+    announce("Step " + n + " marked as not done.");
+  } else {
+    const next = currentStep();
+    if (next) {
+      announce("Step " + n + " done. Next: " + stepTitle(next) + ".");
+      showStep(next); // open the next step so it is obvious what to do now
+    } else {
+      openOnly(null);
+      announce("Step " + n + " done. All steps are ticked.");
+    }
+  }
+}
+
+stepList.forEach((step) => {
+  step.querySelector(".step__dot").addEventListener("click", () => toggleDone(step));
+  const doneBtn = step.querySelector(".step__done");
+  if (doneBtn) doneBtn.addEventListener("click", () => toggleDone(step));
+  const head = step.querySelector(".step__head");
+  head.addEventListener("click", () => {
+    if (head.getAttribute("aria-expanded") === "true") openOnly(null);
+    else openOnly(step.dataset.id);
   });
 });
 
-render();
+// The numbered stepper jumps to a step; "Go to my current step" jumps to the one you are on
+stepperItems.forEach((li, i) => {
+  const a = li.querySelector("a");
+  if (a && stepList[i]) a.addEventListener("click", (e) => { e.preventDefault(); showStep(stepList[i]); });
+});
+const jumpBtn = document.getElementById("journeyJump");
+if (jumpBtn) {
+  jumpBtn.addEventListener("click", () => {
+    const cur = currentStep() || stepList[stepList.length - 1];
+    if (cur) showStep(cur);
+  });
+}
+
+if (stepList.length) {
+  render();
+  const cur = currentStep();
+  if (cur) openOnly(cur.dataset.id); // first visit: the step to do now is already open
+}
 
 // ===== Homepage: one card with five tabs =====
 // Without JavaScript every panel simply shows one after another (the tab bar stays hidden).
