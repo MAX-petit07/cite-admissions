@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Houses and backups suggested from your quiz answers. Guidance only: CIUP decides admission." />
+  <script>document.documentElement.classList.add("js");</script>
+  <title>Your Plan A, B and C — MANI</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body class="plans-body">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar" id="topbar">
+    <div class="container topbar__inner">
+      <a href="index.html" class="logo" aria-label="MANI, home">
+        <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
+          <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
+          <path d="M24 15v29" />
+          <path d="M4 44h40" />
+        </svg>
+        <span class="logo__text"><strong>MANI</strong></span>
+      </a>
+      <div class="topbar__right">
+        <nav class="topnav" id="topnav" aria-label="Main">
+          <a href="maisons.html" class="topnav__link">Houses</a>
+          <a href="timeline.html#who-can-apply" class="topnav__link">Eligibility</a>
+          <a href="timeline.html" class="topnav__link">Timeline</a>
+        </nav>
+        <a href="account.html" class="btn btn--mint btn--sm topbar__start" data-auth-link>Sign up</a>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="pagehead pagehead--center">
+      <div class="container">
+        <h1>Which house is the best <span class="accent">for you?</span></h1>
+        <p>Based on your answers. This is guidance to plan your applications, not an admission decision: CIUP decides.</p>
+      </div>
+    </section>
+
+    <div class="container plans-page" id="plansRoot">
+      <p class="empty" id="plansEmpty" hidden>You haven't taken the quiz yet.<br /><a class="btn btn--dark" href="quiz.html">Take the quiz <span aria-hidden="true">→</span></a></p>
+
+      <div id="plansBody" hidden>
+        <ul class="planrow" id="planRow"></ul>
+        <div class="answers-row" id="answersRow"></div>
+        <div id="planDetails"></div>
+        <div class="signbox">
+          <div>
+            <h2>Keep your personal experience</h2>
+            <p>Sign up to save your answers, your plans and your timeline.</p>
+          </div>
+          <a href="account.html" class="btn btn--mint btn--lg">Sign up <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="official">
+        <a class="official__logo" href="https://www.ciup.fr" target="_blank" rel="noopener" aria-label="Cité internationale universitaire de Paris, official website">
+          <img src="images/ciup-logo.png" alt="Cité internationale universitaire de Paris" onerror="this.replaceWith(document.createTextNode('ciup.fr'))" />
+        </a>
+        <p class="official__text"><strong>MANI</strong> Independent student project</p>
+      </div>
+      <p class="footer__disclaimer">Independent student project, not affiliated with the Cité internationale universitaire de Paris. Always check <a href="https://www.ciup.fr" target="_blank" rel="noopener">ciup.fr</a>.</p>
+    </div>
+  </footer>
+
+  <script src="journey-data.js"></script>
+  <script src="script.js"></script>
+  <script src="plans.js"></script>
+</body>
+</html>

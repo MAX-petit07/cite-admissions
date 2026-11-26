@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A plain-English guide for international students applying for accommodation at the Cité Internationale Universitaire de Paris (CIUP). MANI is an independent student project, not affiliated with CIUP." />
-  <script>document.documentElement.classList.add("js"); /* the app layout only turns on when JavaScript works; without it every step is shown one after another */</script>
+  <meta name="description" content="Who can apply to the Cité internationale universitaire de Paris, which house fits you, and every step until your answer. MANI is an independent student project, not affiliated with CIUP." />
+  <script>document.documentElement.classList.add("js");</script>
+  <script>
+    /* Old links such as index.html#who-can-apply now live on the timeline page */
+    (function(){var h=location.hash;if(/^#(welcome|who-can-apply|how-it-works|key-facts|guide|plan-b|planb|faq)$/.test(h))location.replace("timeline.html"+h);})();
+  </script>
   <title>MANI — Your guide to living at CIUP</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,47 +16,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" type="image/webp" href="images/cite-arch.webp" imagesrcset="images/cite-arch-900.webp 900w, images/cite-arch.webp 1600w" imagesizes="100vw" fetchpriority="high" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="pages.css" />
 </head>
-<body class="app-page">
-
-  <!-- One set of line icons, reused everywhere with <use> -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <defs>
-      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
-      <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
-      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-      <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
-      <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
-      <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5H5V6h5"/></symbol>
-      <symbol id="i-grad" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/></symbol>
-      <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 15h9"/></symbol>
-      <symbol id="i-art" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 1.5-2-.6-1.200.2-2.500 1.700-2.500H17a4 4 0 0 0 4-4C21 7 17 3 12 3z"/><path d="M7.500 11h.01M10 7.500h.01M14.500 7.500h.01"/></symbol>
-      <symbol id="i-guest" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.400 3.600-7 8-7s8 2.600 8 7"/></symbol>
-      <symbol id="i-school" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/></symbol>
-      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 5h11l3 3-3 3H5"/><path d="M5 13h9l3 3-3 3H5"/></symbol>
-      <symbol id="i-desk" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
-      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
-      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-      <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
-      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></symbol>
-      <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="11.500" r="3"/><path d="M7 20c.8-2.500 2.600-4 5-4s4.200 1.500 5 4"/></symbol>
-      <symbol id="i-form" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
-      <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></symbol>
-      <symbol id="i-life" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.500"/><path d="m5.600 5.600 3.900 3.900M14.500 14.500l3.900 3.900M18.400 5.600l-3.900 3.900M9.500 14.500l-3.900 3.900"/></symbol>
-      <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></symbol>
-      <symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.500 6 1.500 1.500L7.500 5M3.500 12l1.500 1.500L7.500 11M3.500 18l1.500 1.500 2.500-2.500"/></symbol>
-      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.500 9.500a2.500 2.500 0 1 1 3.500 2.300c-.7.400-1 1-1 1.700M12 17h.01"/></symbol>
-    </defs>
-  </svg>
-
-  <a class="skip" href="#content">Skip to content</a>
-
-  <!-- ============ TOP BAR: transparent on the photo, solid midnight once you scroll ============ -->
+<body>
+  <a class="skip" href="#why">Skip to content</a>
   <header class="topbar topbar--hero" id="topbar">
     <div class="container topbar__inner">
-      <a href="index.html#top" class="logo" aria-label="MANI, back to the top">
-        <!-- Simple placeholder icon (not the official CIUP logo) -->
+      <a href="index.html" class="logo" aria-label="MANI, home">
         <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
           <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
@@ -64,15 +34,16 @@
       <div class="topbar__right">
         <nav class="topnav" id="topnav" aria-label="Main">
           <a href="maisons.html" class="topnav__link">Houses</a>
-          <a href="#faq" class="topnav__link" data-view-link="faq">FAQ</a>
+          <a href="timeline.html#who-can-apply" class="topnav__link">Eligibility</a>
+          <a href="timeline.html" class="topnav__link">Timeline</a>
         </nav>
-        <a href="#who-can-apply" class="btn btn--mint btn--sm topbar__start">Start</a>
+        <a href="account.html" class="btn btn--mint btn--sm topbar__start" data-auth-link>Sign up</a>
         <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="topnav">☰</button>
       </div>
     </div>
   </header>
 
-  <!-- ============ HERO: campus photo ============ -->
+  <!-- ============ HERO ============ -->
   <section class="herophoto" id="top" aria-labelledby="hero-title">
     <picture class="herophoto__pic">
       <source type="image/webp" srcset="images/cite-arch-900.webp 900w, images/cite-arch.webp 1600w" sizes="100vw" />
@@ -81,378 +52,73 @@
     <div class="herophoto__shade" aria-hidden="true"></div>
     <div class="container herophoto__inner">
       <h1 id="hero-title"><span class="herophoto__a">Applying to CIUP</span><span class="herophoto__b">in clear English</span></h1>
-      <p class="herophoto__line">Your step-by-step guide to student housing at the Cité internationale universitaire de Paris.</p>
-      <a href="#who-can-apply" class="btn btn--lg herophoto__cta" id="heroCta">Start in 4 steps <span aria-hidden="true">→</span></a>
+      <p class="herophoto__line">Who can apply, which house fits you, and every step until your answer.</p>
+      <div class="herophoto__buttons">
+        <a href="quiz.html" class="btn btn--lg btn--white">Find my house <span aria-hidden="true">→</span></a>
+        <a href="timeline.html" class="btn btn--lg btn--outline">See the timeline</a>
+      </div>
     </div>
-    <nav class="container herosteps" aria-label="The 4 steps">
-      <ol>
-        <li><a href="#who-can-apply">1 · Can I apply?</a></li>
-        <li><a href="#how-it-works">2 · My route</a></li>
-        <li><a href="#key-facts">3 · Prepare and apply</a></li>
-        <li><a href="#plan-b">4 · Wait and Plan B</a></li>
-      </ol>
-    </nav>
+    <p class="herophoto__note">Timeline = general info: who can apply, the 3 routes, documents, key dates and Plan B</p>
   </section>
 
-  <!-- Phone and tablet: a compact bar that opens the list of steps (hidden on desktop) -->
-  <div class="mobilebar" id="mobilebar" hidden>
-    <button type="button" class="mobilebar__btn" id="sheetBtn" aria-expanded="false" aria-controls="sidebar">
-      <span class="mobilebar__text" id="mobileLabel">Your application</span>
-      <svg class="icon icon--sm" aria-hidden="true"><use href="#i-chev"/></svg>
-    </button>
-    <div class="bar bar--thin" role="progressbar" aria-label="Application progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="mobileBar"><span class="bar__fill"></span></div>
-  </div>
-
-  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
-
-  <div class="app container">
-
-    <!-- ============ SIDEBAR: where am I? ============ -->
-    <aside class="sidebar" id="sidebar" aria-label="Your application">
-      <div class="sidebar__head">
-        <h2 class="sidebar__title">Your application</h2>
-        <button type="button" class="sidebar__close" id="sheetClose" aria-label="Close the list of steps">✕</button>
+  <main id="why">
+    <!-- ============ WHY MANI? ============ -->
+    <section class="band band--grey center" aria-labelledby="why-title">
+      <div class="container">
+        <p class="label-s">Why MANI?</p>
+        <h2 id="why-title">Many applicants, <span class="accent">fewer places.</span></h2>
+        <p class="lead">That's why knowing your route, your documents and your dates makes a real difference.</p>
+        <div class="numbers">
+          <div class="numcard numcard--placeholder">
+            <span class="numcard__big">24,000</span>
+            <span class="numcard__label">[what this counts]</span>
+            <span class="numcard__src">Source to add</span>
+            <span class="numcard__tag">Placeholder: not verified yet</span>
+          </div>
+          <svg class="numbers__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>
+          <div class="numcard numcard--dark">
+            <span class="numcard__big">12,000</span>
+            <span class="numcard__label">residents a year at the Cité</span>
+            <span class="numcard__src">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener" style="text-decoration:underline">ciup.fr</a></span>
+          </div>
+        </div>
+        <p class="numbers__foot">About 7,000–7,200 accommodations · 150 nationalities · Source: ciup.fr, checked 10 Nov 2026</p>
       </div>
-      <div class="bar" role="progressbar" aria-label="Application progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="sideBar"><span class="bar__fill"></span></div>
-      <p class="sidebar__count" id="sideCount">0 of 4 done</p>
+    </section>
 
-      <nav aria-label="Application steps">
-        <ol class="steps-nav" id="stepsNav">
-          <li class="steps-nav__glide" id="glide" aria-hidden="true"></li>
-          <li><button type="button" class="nav-step" data-step="1">
-            <span class="nav-step__mark" aria-hidden="true"><span class="nav-step__num">1</span><svg class="icon"><use href="#i-check"/></svg></span>
-            <span class="nav-step__text"><span class="nav-step__title">Can I apply?</span><span class="nav-step__hint">Who's eligible</span></span>
-            <span class="sr-only nav-step__state"></span>
-          </button></li>
-          <li><button type="button" class="nav-step" data-step="2">
-            <span class="nav-step__mark" aria-hidden="true"><span class="nav-step__num">2</span><svg class="icon"><use href="#i-check"/></svg></span>
-            <span class="nav-step__text"><span class="nav-step__title">Choose my route</span><span class="nav-step__hint">School, national or central</span></span>
-            <span class="sr-only nav-step__state"></span>
-          </button></li>
-          <li><button type="button" class="nav-step" data-step="3">
-            <span class="nav-step__mark" aria-hidden="true"><span class="nav-step__num">3</span><svg class="icon"><use href="#i-check"/></svg></span>
-            <span class="nav-step__text"><span class="nav-step__title">Prepare and apply</span><span class="nav-step__hint">Documents and dates</span></span>
-            <span class="sr-only nav-step__state"></span>
-          </button></li>
-          <li><button type="button" class="nav-step" data-step="4">
-            <span class="nav-step__mark" aria-hidden="true"><span class="nav-step__num">4</span><svg class="icon"><use href="#i-check"/></svg></span>
-            <span class="nav-step__text"><span class="nav-step__title">Wait and Plan B</span><span class="nav-step__hint">Answers and backup</span></span>
-            <span class="sr-only nav-step__state"></span>
-          </button></li>
+    <!-- ============ WHICH HOUSE ============ -->
+    <section class="band band--white" aria-labelledby="which-title">
+      <div class="container which">
+        <div>
+          <p class="label-s">2 minutes</p>
+          <h2 id="which-title">Which house is the best <span class="accent">for you?</span></h2>
+          <p>Answer a few questions about your budget, studies, nationality and dates. We'll suggest your Plan A, B and C.</p>
+          <div class="which__cta">
+            <a href="quiz.html" class="btn btn--lg btn--dark">Take our quiz <span aria-hidden="true">→</span></a>
+            <span class="which__free">Free · no account needed</span>
+          </div>
+        </div>
+        <ol class="stairs" aria-label="Your three plans">
+          <li><span class="stairs__badge" aria-hidden="true">A</span><div><strong>Plan A</strong> <span class="t">Your preferences and within your budget</span></div></li>
+          <li><span class="stairs__badge" aria-hidden="true">B</span><div><strong>Plan B</strong> <span class="t">Some of your preferences</span></div></li>
+          <li><span class="stairs__badge" aria-hidden="true">C</span><div><strong>Plan C</strong> <span class="t">A safe backup outside the Cité</span></div></li>
         </ol>
-      </nav>
-
-      <div class="sidebar__foot">
-        <a href="maisons.html" class="sidebar__link">Browse the 48 houses <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a href="https://www.ciup.fr" target="_blank" rel="noopener" class="sidebar__link">Official site: ciup.fr <svg class="icon icon--sm" aria-hidden="true"><use href="#i-ext"/></svg></a>
       </div>
-    </aside>
-
-    <!-- ============ CONTENT CARD ============ -->
-    <main class="stage" id="content" tabindex="-1">
-
-      <!-- Returning visitor bar (JavaScript shows it) -->
-      <div class="welcomeback" id="welcomeBack" hidden>
-        <p class="welcomeback__text" id="wbText" role="status"></p>
-        <div class="welcomeback__actions" id="wbActions">
-          <button type="button" class="linkbtn" id="startOver">Start over</button>
-        </div>
-        <div class="welcomeback__confirm" id="wbConfirm" hidden>
-          <span>Clear your ticks and start again?</span>
-          <button type="button" class="btn btn--dark btn--sm" id="startOverYes">Yes, start over</button>
-          <button type="button" class="btn btn--light btn--sm" id="startOverNo">Cancel</button>
-        </div>
-      </div>
-
-      <!-- ===================== WELCOME ===================== -->
-      <section class="view view--welcome" id="welcome" data-view="welcome" aria-labelledby="welcome-title">
-        <div class="welcome">
-          <div class="welcome__text">
-            <p class="eyebrow">For international students applying to CIUP</p>
-            <h2 class="welcome__title" id="welcome-title">Your CIUP application, one step at a time</h2>
-            <p class="lead">4 short steps in plain English. Every fact links to the official CIUP website.</p>
-            <div class="welcome__cta">
-              <a href="#who-can-apply" class="btn btn--mint btn--lg" data-go="1">Start with Step 1 <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            </div>
-            <ul class="chips" aria-label="Jump to the answer">
-              <li><a class="chip" href="#how-it-works" data-go="2">Which house can I apply to? <span class="chip__step"><span class="sr-only">Step </span>→ 2</span></a></li>
-              <li><a class="chip" href="#key-facts" data-go="3">Which documents do I need? <span class="chip__step"><span class="sr-only">Step </span>→ 3</span></a></li>
-              <li><a class="chip" href="#plan-b" data-go="4">When will I hear back? <span class="chip__step"><span class="sr-only">Step </span>→ 4</span></a></li>
-              <li><a class="chip" href="#how-it-works" data-go="2">Why might I get a different house? <span class="chip__step"><span class="sr-only">Step </span>→ 2</span></a></li>
-            </ul>
-            <p class="small muted">The questions that came up most in our survey of 36 applicants and residents.</p>
-            <p class="trust">Free · Made by students · Not affiliated with CIUP</p>
-          </div>
-
-          <!-- A path with 4 dots leading to a little house (drawn in on load) -->
-          <svg class="art" viewBox="14 22 340 256" role="img" aria-label="A path with four steps leading to a small house">
-            <path class="art__ground" d="M16 268h328"/>
-            <path class="art__path" pathLength="1" d="M30 252C90 252 110 212 160 208S230 214 250 176S224 128 262 112S300 96 315 92"/>
-            <circle class="art__dot" style="--d:.3s" cx="99" cy="231" r="11"/>
-            <circle class="art__dot" style="--d:.6s" cx="160" cy="208" r="11"/>
-            <circle class="art__dot" style="--d:.9s" cx="250" cy="176" r="11"/>
-            <circle class="art__dot" style="--d:1.2s" cx="262" cy="112" r="11"/>
-            <g class="art__house" style="--d:1.5s">
-              <path d="M292 56V92H338V56"/>
-              <path d="M284 60 315 32 346 60"/>
-              <path d="M308 92V74H322V92"/>
-            </g>
-          </svg>
-        </div>
-      </section>
-
-      <!-- ===================== STEP 1 ===================== -->
-      <section class="view" id="who-can-apply" data-view="1" aria-labelledby="t1">
-        <p class="stepcount">Step 1 of 4</p>
-        <h2 class="view__title" id="t1">Can I apply?</h2>
-        <p class="view__sub">See if one of CIUP's four profiles fits you.</p>
-
-        <p class="short"><strong>In short</strong><span>Students apply from a Master's or doctorate (Bac+4 or equivalent). Researchers, artists and passing guests have their own conditions. This is a summary of CIUP's own rules, not a decision about your case.</span></p>
-
-        <div class="basis card-s">
-          <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-grad"/></svg></span>
-          <div>
-            <h3>For students: the basics</h3>
-            <p>Enrolled in a Master's or doctorate (Bac+4 or equivalent) at a French public or private higher-education institution, preferably in Île-de-France.</p>
-          </div>
-        </div>
-
-        <ul class="cards">
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-grad"/></svg></span>
-            <h3>Students and top-level athletes</h3>
-            <p>Enrolled in a Master's or doctorate, as above.</p>
-            <details class="more"><summary>Read more</summary>
-              <ul>
-                <li>Arts students can apply once their programme has reached 3 years of higher education at a recognised institution.</li>
-                <li>Athletes must also be enrolled in higher education.</li>
-              </ul>
-            </details>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-flask"/></svg></span>
-            <h3>Researchers</h3>
-            <p>A doctorate and a post-doctoral project, or a teacher-researcher.</p>
-            <details class="more"><summary>Read more</summary>
-              <ul><li>The project is accepted by, or follows an invitation from, a higher-education or research institution (Île-de-France).</li></ul>
-            </details>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-art"/></svg></span>
-            <h3>Artists</h3>
-            <p>Studies finished, with a specific artistic project in Île-de-France.</p>
-            <details class="more"><summary>Read more</summary>
-              <ul>
-                <li>For example an exhibition or a performance.</li>
-                <li>This includes cultural professionals: curators, archivists, librarians and technicians.</li>
-              </ul>
-            </details>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-guest"/></svg></span>
-            <h3>Passing guests</h3>
-            <p>Exceptionally, people with an academic or cultural link to a house. Maximum stay: 1 month.</p>
-          </li>
-        </ul>
-
-        <p class="source">Some houses have extra conditions on their own pages (see <a href="maisons.html">Houses</a>). Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026.</p>
-
-        <div class="actions">
-          <button type="button" class="btn btn--light" data-back>← Back</button>
-          <a class="askline" href="mailto:admissions.etudiants@ciup.fr">Not sure? Ask CIUP</a>
-          <button type="button" class="btn btn--mint btn--lg" data-next="1">Yes, I can apply → Step 2</button>
-        </div>
-      </section>
-
-      <!-- ===================== STEP 2 ===================== -->
-      <section class="view" id="how-it-works" data-view="2" aria-labelledby="t2">
-        <p class="stepcount">Step 2 of 4</p>
-        <h2 class="view__title" id="t2">Choose my route</h2>
-        <p class="view__sub">Find out who to contact: your school, your country's house, or CIUP.</p>
-
-        <p class="short"><strong>In short</strong><span>There are three ways to apply. Yours depends on your school or your nationality. A Maison (house) is one of the residences listed on the CIUP website.</span></p>
-
-        <ol class="cards cards--routes">
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-school"/></svg></span>
-            <h3>School house <span class="fr">(Maison d'école)</span></h3>
-            <p>For students of some schools, for example AgroParisTech or Arts et Métiers.</p>
-            <p class="contact">Contact: your school's house only.</p>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg></span>
-            <h3>National house <span class="fr">(Maison nationale)</span></h3>
-            <p>For nationalities represented by a house. The house is your point of contact, and admission then covers the whole Cité.</p>
-            <p class="contact">Contact: the house for your country only.</p>
-          </li>
-          <li class="card-s card-s--main">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-desk"/></svg></span>
-            <h3>Central admissions service</h3>
-            <p>For everyone else. Online only.</p>
-            <p class="contact">Students and athletes: <a href="mailto:admissions.etudiants@ciup.fr">admissions.etudiants@ciup.fr</a></p>
-            <details class="more"><summary>Other emails</summary>
-              <ul><li>Researchers: admissions.chercheurs@ciup.fr</li><li>Artists: admissions.artistes@ciup.fr</li></ul>
-            </details>
-            <a class="btn btn--dark btn--sm" href="https://bienvenue.ciup.fr/questionnaire/" target="_blank" rel="noopener">Official online form <svg class="icon icon--sm" aria-hidden="true"><use href="#i-ext"/></svg></a>
-          </li>
-        </ol>
-
-        <div class="basis card-s">
-          <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-swap"/></svg></span>
-          <div>
-            <h3>Why might I get a different house?</h3>
-            <p>After you are admitted, the house director can ask you to live in your country's or school's house, or in another house. CIUP calls this “brassage” (mixing): it helps residents of all nationalities meet.</p>
-            <p class="source source--inline">Source: <a href="https://www.ciup.fr/wp-content/uploads/2022/03/annexe-1-REGLEMENT-ADMISSIONS-FR-DEF-2022.pdf" target="_blank" rel="noopener">CIUP admission regulation</a> (PDF, in French), checked 24 November 2026.</p>
-          </div>
-        </div>
-
-        <p class="source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026.</p>
-
-        <div class="actions">
-          <button type="button" class="btn btn--light" data-back>← Back</button>
-          <a class="askline" href="maisons.html">Browse the 48 houses</a>
-          <button type="button" class="btn btn--mint btn--lg" data-next="2">I know my route → Step 3</button>
-        </div>
-      </section>
-
-      <!-- ===================== STEP 3 ===================== -->
-      <section class="view" id="key-facts" data-view="3" aria-labelledby="t3">
-        <p class="stepcount">Step 3 of 4</p>
-        <h2 class="view__title" id="t3">Prepare and apply</h2>
-        <p class="view__sub">Get two documents ready, fill in the online form, and send it.</p>
-
-        <p class="short"><strong>In short</strong><span>Have a copy of your passport or ID card and an ID photo ready. Then fill in the online form for your profile and click “send”. There is no deadline.</span></p>
-
-        <div class="checklist card-s" aria-labelledby="cl-title">
-          <div class="checklist__head">
-            <h3 id="cl-title">Your checklist</h3>
-            <p class="checklist__status" id="clStatus" role="status"></p>
-          </div>
-          <ul class="checks">
-            <li><label class="check"><input type="checkbox" data-check="passport" /><span class="check__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span><span class="check__text"><span class="check__icon" aria-hidden="true"><svg class="icon"><use href="#i-doc"/></svg></span><span><strong>A copy of your passport or ID card</strong></span></span></label></li>
-            <li><label class="check"><input type="checkbox" data-check="photo" /><span class="check__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span><span class="check__text"><span class="check__icon" aria-hidden="true"><svg class="icon"><use href="#i-photo"/></svg></span><span><strong>An ID photo</strong></span></span></label></li>
-            <li><label class="check"><input type="checkbox" data-check="form" /><span class="check__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span><span class="check__text"><span class="check__icon" aria-hidden="true"><svg class="icon"><use href="#i-form"/></svg></span><span><strong>Fill in the online form for your profile</strong><span class="check__hint">Choose a username and password to follow your request.</span></span></span></label></li>
-            <li><label class="check"><input type="checkbox" data-check="send" /><span class="check__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.500 4.500 4.500L19 7.500"/></svg></span><span class="check__text"><span class="check__icon" aria-hidden="true"><svg class="icon"><use href="#i-send"/></svg></span><span><strong>Click “send”, then check for the confirmation email</strong><span class="check__hint">You should get an automatic email. If you don't, submit again.</span></span></span></label></li>
-          </ul>
-          <a class="btn btn--dark btn--sm" href="https://bienvenue.ciup.fr/questionnaire/" target="_blank" rel="noopener">Official online form <svg class="icon icon--sm" aria-hidden="true"><use href="#i-ext"/></svg></a>
-        </div>
-
-        <h3 class="subhead">Key dates</h3>
-        <ul class="cards cards--two">
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg></span>
-            <h3>No deadline</h3>
-            <p>New residents are accepted throughout the academic year.</p>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
-            <h3>April for a September arrival</h3>
-            <p>For a September arrival, apply in April.</p>
-            <details class="more"><summary>Read more</summary>
-              <p>The French CIUP page says to apply “from April”. The English page says requests must be “completed in April”. The two differ, so check with CIUP.</p>
-            </details>
-          </li>
-        </ul>
-
-        <p class="source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026. Applications are online only.</p>
-
-        <div class="actions">
-          <button type="button" class="btn btn--light" data-back>← Back</button>
-          <button type="button" class="btn btn--mint btn--lg" data-next="3">I've applied → Step 4</button>
-        </div>
-      </section>
-
-      <!-- ===================== STEP 4 ===================== -->
-      <section class="view" id="plan-b" data-view="4" aria-labelledby="t4">
-        <p class="stepcount">Step 4 of 4</p>
-        <h2 class="view__title" id="t4">Wait and Plan B</h2>
-        <p class="view__sub">The answer comes by email. Here is what to expect, and what to do if it is a no.</p>
-
-        <p class="short"><strong>In short</strong><span>You get an answer by email, whatever the outcome. CIUP publishes no general processing time. Below: the 15-day rule, and a Plan B if the answer is no.</span></p>
-
-        <ul class="cards cards--three">
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
-            <h3>By email</h3>
-            <p>The answer comes by email, whatever the outcome.</p>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
-            <h3>No set time</h3>
-            <p>Committees meet several times a year. CIUP publishes no general processing time.</p>
-          </li>
-          <li class="card-s">
-            <span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg></span>
-            <h3>The 15-day rule</h3>
-            <p>No offer 15 days before your arrival date means your application was not accepted.</p>
-            <details class="more"><summary>Read more</summary>
-              <p>The English and French CIUP pages word this rule differently. If you are unsure, ask the admissions service: <a href="mailto:admissions.etudiants@ciup.fr">admissions.etudiants@ciup.fr</a></p>
-            </details>
-          </li>
-        </ul>
-
-        <section class="planb card-s" aria-labelledby="pb-title">
-          <div class="planb__head"><span class="ico"><svg class="icon" aria-hidden="true"><use href="#i-life"/></svg></span><h3 id="pb-title">Plan B: what if I'm not accepted?</h3></div>
-          <div class="planb__block">
-            <span class="label label--official">Official</span>
-            <p>If you have no accommodation offer 15 days before your desired arrival date, your application has not been accepted.</p>
-            <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">Official source: ciup.fr →</a>
-          </div>
-          <div class="planb__block">
-            <span class="label label--tips">Our tips</span>
-            <ul class="planb__tips">
-              <li>Start looking at other student housing in parallel while you wait.</li>
-              <li>Keep your documents ready.</li>
-              <li>Contact the admissions service if you have questions: <a href="mailto:admissions.etudiants@ciup.fr">admissions.etudiants@ciup.fr</a></li>
-            </ul>
-          </div>
-        </section>
-
-        <div class="alldone" id="allDone" role="status" hidden>
-          <p class="alldone__title">You're all set! Keep an eye on your email.</p>
-          <p>This only finishes your checklist, not your application.</p>
-        </div>
-
-        <p class="source">Source: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr</a>, checked 10 November 2026.</p>
-
-        <div class="actions">
-          <button type="button" class="btn btn--light" data-back>← Back</button>
-          <button type="button" class="btn btn--mint btn--lg" data-next="4" id="finishBtn">I have my answer ✓</button>
-        </div>
-      </section>
-
-      <!-- ===================== QUICK ANSWERS (FAQ) ===================== -->
-      <section class="view" id="faq" data-view="faq" aria-labelledby="tfaq">
-        <p class="stepcount">FAQ</p>
-        <h2 class="view__title" id="tfaq">Quick answers</h2>
-        <p class="view__sub">Short answers, only from official CIUP information.</p>
-        <div class="faq">
-          <details><summary>Is MANI official?</summary><p>No. MANI is an independent student project and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p></details>
-          <details><summary>Is there a deadline?</summary><p>No. New residents are accepted throughout the academic year. For a September arrival, apply in April. The French and English CIUP pages word this slightly differently, so check with CIUP.</p></details>
-          <details><summary>How do I apply?</summary><p>Online only. Your route depends on your school or your nationality: a school house, a national house, or the central admissions service. Step 2 explains the three routes.</p></details>
-          <details><summary>When will I get an answer?</summary><p>By email, whatever the outcome. Admissions committees meet several times a year, and CIUP publishes no general processing time.</p></details>
-          <details><summary>What if I have no offer 15 days before I arrive?</summary><p>Then your application has not been accepted. The English and French CIUP pages word this rule differently, so ask the admissions service if you are unsure. Step 4 has our Plan B tips.</p></details>
-        </div>
-        <div class="actions"><button type="button" class="btn btn--light" data-back>← Back to my application</button></div>
-      </section>
-
-    </main>
-  </div>
+    </section>
+  </main>
 
   <footer class="footer">
     <div class="container footer__inner">
-      <!-- Official information area: the logo file goes in images/ciup-logo.png -->
       <div class="official">
         <a class="official__logo" href="https://www.ciup.fr" target="_blank" rel="noopener" aria-label="Cité internationale universitaire de Paris, official website">
           <img src="images/ciup-logo.png" alt="Cité internationale universitaire de Paris" onerror="this.replaceWith(document.createTextNode('ciup.fr'))" />
         </a>
-        <p class="official__text"><strong>Official information:</strong> Cité internationale universitaire de Paris</p>
+        <p class="official__text"><strong>MANI</strong> Independent student project</p>
       </div>
-      <p class="footer__disclaimer">MANI is an independent student project and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+      <p class="footer__disclaimer">Independent student project, not affiliated with the Cité internationale universitaire de Paris. Always check <a href="https://www.ciup.fr" target="_blank" rel="noopener">ciup.fr</a>.</p>
     </div>
   </footer>
 
-  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
   <script src="script.js"></script>
 </body>
 </html>

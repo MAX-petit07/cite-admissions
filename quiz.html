@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Six short questions to suggest your Plan A, B and C at the Cité internationale universitaire de Paris." />
+  <script>document.documentElement.classList.add("js");</script>
+  <title>Find my house — MANI quiz</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body class="quiz-page">
+  <header class="qbar">
+    <div class="container qbar__inner">
+      <a href="index.html" class="logo" aria-label="MANI, home">
+        <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
+          <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
+          <path d="M24 15v29" />
+          <path d="M4 44h40" />
+        </svg>
+        <span class="logo__text"><strong>MANI</strong></span>
+      </a>
+      <a href="index.html" class="qclose"><span aria-hidden="true">✕</span> Close the quiz</a>
+    </div>
+  </header>
+
+  <main class="qmain" id="main">
+    <div class="qprogress" id="qprogress">
+      <div class="qprogress__row"><span id="qcount">Question 1 of 6</span><span class="muted">About 2 minutes</span></div>
+      <div class="qprogress__track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="1" id="qtrack"><span class="qprogress__fill"></span></div>
+    </div>
+
+    <div class="qcard">
+      <form id="quizForm" novalidate>
+        <section class="qstep" data-q="1" aria-labelledby="q1t">
+          <h2 id="q1t" tabindex="-1">What is your monthly budget for housing?</h2>
+          
+          <div class="answers" role="radiogroup" aria-labelledby="q1t">
+            <label class="answer"><input type="radio" name="budget" value="u500" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Under €500</span></label>
+            <label class="answer"><input type="radio" name="budget" value="500-700" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>€500 to €700</span></label>
+            <label class="answer"><input type="radio" name="budget" value="700plus" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>€700 or more</span></label>
+            <label class="answer"><input type="radio" name="budget" value="unsure" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Not sure yet</span></label>
+          </div>
+          <p class="qerror" role="alert" hidden></p>
+        </section>
+        <section class="qstep" data-q="2" aria-labelledby="q2t">
+          <h2 id="q2t" tabindex="-1">Who pays for your studies and housing?</h2>
+          
+          <div class="answers" role="radiogroup" aria-labelledby="q2t">
+            <label class="answer"><input type="radio" name="payer" value="independent" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Me <small>I'm independent</small></span></label>
+            <label class="answer"><input type="radio" name="payer" value="family" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>My family <small>I'm dependent</small></span></label>
+            <label class="answer"><input type="radio" name="payer" value="scholarship" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>A scholarship</span></label>
+            <label class="answer"><input type="radio" name="payer" value="mix" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>A mix</span></label>
+          </div>
+          <p class="qnote" id="payerNote" hidden>Scholarships: see the <a href="https://www.ciup.fr/bourses/" target="_blank" rel="noopener">official CIUP scholarships page ↗</a>.</p>
+          <p class="qerror" role="alert" hidden></p>
+        </section>
+        <section class="qstep" data-q="3" aria-labelledby="q3t">
+          <h2 id="q3t" tabindex="-1">What will you study in Paris?</h2>
+          
+          <div class="answers" role="radiogroup" aria-labelledby="q3t">
+            <label class="answer"><input type="radio" name="study" value="master" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Master's</span></label>
+            <label class="answer"><input type="radio" name="study" value="phd" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Doctorate / PhD</span></label>
+            <label class="answer"><input type="radio" name="study" value="arts" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Arts programme <small>3+ years completed</small></span></label>
+            <label class="answer"><input type="radio" name="study" value="other" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Other</span></label>
+          </div>
+          <p class="qnote" id="studyNote" hidden>CIUP mainly hosts Master's and doctoral students (Bac+4 or equivalent), plus researchers, artists and passing guests. You can keep going and see housing ideas. For your situation, the official CIUP page has the exact conditions: <a href="https://www.ciup.fr/en/apply-for-accommodation/" target="_blank" rel="noopener">ciup.fr ↗</a>.</p>
+          <p class="qerror" role="alert" hidden></p>
+        </section>
+        <section class="qstep" data-q="4" aria-labelledby="q4t">
+          <h2 id="q4t" tabindex="-1">What is your nationality?</h2>
+          
+          <div class="qfield">
+            <label for="countrySearch">Search your country</label>
+            <input type="search" id="countrySearch" autocomplete="off" placeholder="e.g. Germany" aria-controls="countryList" />
+            <p class="qcount" id="countryCount" role="status"></p>
+          </div>
+          <div class="countries" id="countryList" role="radiogroup" aria-labelledby="q4t"></div>
+          <p class="qerror" role="alert" hidden></p>
+        </section>
+        <section class="qstep" data-q="5" aria-labelledby="q5t">
+          <h2 id="q5t" tabindex="-1">When do you want to arrive?</h2>
+          
+          <div class="qdate">
+            <div class="qfield"><label for="arrMonth">Month</label><select id="arrMonth"><option value="">Choose a month</option></select></div>
+            <div class="qfield"><label for="arrYear">Year</label><select id="arrYear"><option value="">Year</option></select></div>
+          </div>
+          <p class="qnote">For a September arrival, CIUP says to apply in April.</p>
+          <p class="qerror" role="alert" hidden></p>
+        </section>
+        <section class="qstep" data-q="6" aria-labelledby="q6t">
+          <h2 id="q6t" tabindex="-1">What matters most to you?</h2>
+          <p class="qhint">Choose as many as you like.</p>
+          <div class="answers" role="group" aria-labelledby="q6t">
+            <label class="answer answer--multi"><input type="checkbox" name="prefs" value="price" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Lowest price</span></label>
+            <label class="answer answer--multi"><input type="checkbox" name="prefs" value="bathroom" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Private bathroom</span></label>
+            <label class="answer answer--multi"><input type="checkbox" name="prefs" value="kitchen" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Shared kitchen</span></label>
+            <label class="answer answer--multi"><input type="checkbox" name="prefs" value="quiet" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Quiet place to study</span></label>
+            <label class="answer answer--multi"><input type="checkbox" name="prefs" value="lively" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Lively community</span></label>
+            <label class="answer answer--multi"><input type="checkbox" name="prefs" value="mycountry" /><span class="answer__mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>People from my country</span></label>
+          </div>
+          <p class="qerror" role="alert" hidden></p>
+        </section>
+        <div class="qnav" id="qnav">
+          <button type="button" class="btn btn--light" id="qBack">← Back</button>
+          <button type="submit" class="btn btn--dark" id="qNext">Next →</button>
+        </div>
+      </form>
+
+      <section class="qresult" id="qresult" aria-labelledby="qrt" hidden>
+        <h1 id="qrt" tabindex="-1">Your plan is <span class="accent">ready.</span></h1>
+        <p>Based on your answers, we suggest a Plan A, a Plan B and a Plan C. This is guidance, not an admission decision.</p>
+        <a href="plans.html" class="btn btn--mint btn--lg">See my Plan A, B and C <span aria-hidden="true">→</span></a>
+        <div><button type="button" class="qrestart" id="qRestart">↺ Start the quiz again</button></div>
+      </section>
+    </div>
+
+    <div class="signbox" id="qSign" hidden>
+      <div>
+        <h2>Keep your personal experience</h2>
+        <p>Sign up to save your answers, your plans and your timeline.</p>
+      </div>
+      <a href="account.html" class="btn btn--mint btn--lg">Sign up <span aria-hidden="true">→</span></a>
+    </div>
+  </main>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

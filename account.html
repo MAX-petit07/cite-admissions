@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a MANI account or sign in." />
+  <script>document.documentElement.classList.add("js");</script>
+  <title>Sign up or sign in — MANI</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar" id="topbar">
+    <div class="container topbar__inner">
+      <a href="index.html" class="logo" aria-label="MANI, home">
+        <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
+          <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
+          <path d="M24 15v29" />
+          <path d="M4 44h40" />
+        </svg>
+        <span class="logo__text"><strong>MANI</strong></span>
+      </a>
+      <div class="topbar__right">
+        <nav class="topnav" id="topnav" aria-label="Main">
+          <a href="maisons.html" class="topnav__link">Houses</a>
+          <a href="timeline.html#who-can-apply" class="topnav__link">Eligibility</a>
+          <a href="timeline.html" class="topnav__link">Timeline</a>
+        </nav>
+        <a href="account.html" class="btn btn--mint btn--sm topbar__start is-current" data-auth-link>Sign up</a>
+        <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="topnav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="pagehead pagehead--center">
+    <div class="container">
+      <h1>Your <span class="accent">account</span></h1>
+      <p>Sign up to keep your answers, your plans and your timeline.</p>
+    </div>
+  </section>
+
+  <main class="container container--narrow account-page" id="main">
+    <div class="card auth-card">
+
+      <!-- Shown while we check if you are already signed in -->
+      <div id="viewLoading" role="status">Loading your account…</div>
+
+      <!-- Shown if the sign-in service can't start (missing config or CDN blocked) -->
+      <div id="viewUnavailable" hidden>
+        <p class="form-message" id="unavailableText" role="alert"></p>
+      </div>
+
+      <!-- SIGNED OUT: two tabs -->
+      <div id="viewOut" hidden>
+        <div class="tabs" role="tablist" aria-label="Account">
+          <button type="button" class="tab" role="tab" id="tabSignin" aria-controls="panelSignin" aria-selected="true">Sign in</button>
+          <button type="button" class="tab" role="tab" id="tabRegister" aria-controls="panelRegister" aria-selected="false" tabindex="-1">Create account</button>
+        </div>
+
+        <section id="panelSignin" role="tabpanel" aria-labelledby="tabSignin" tabindex="-1">
+          <h2>Welcome back</h2>
+          <form id="signinForm" novalidate>
+            <fieldset class="lockable">
+              <div class="field" data-check="email">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" autocomplete="email" aria-describedby="loginEmail-err" />
+                <p class="field__error" id="loginEmail-err" hidden></p>
+              </div>
+              <div class="field" data-check="password">
+              <label for="loginPassword">Password</label>
+              <div class="pw">
+                <input type="password" id="loginPassword" autocomplete="current-password" maxlength="72" aria-describedby="loginPassword-err" />
+                <button type="button" class="pw__toggle" aria-controls="loginPassword" aria-pressed="false">Show</button>
+              </div>
+              
+              <p class="field__error" id="loginPassword-err" hidden></p>
+            </div>
+            </fieldset>
+            <p class="form-message" id="signinMsg" role="alert" hidden></p>
+            <div class="panel__actions">
+              <button type="submit" class="btn btn--dark" id="signinSubmit">Sign in</button>
+            </div>
+          </form>
+          <p class="auth-switch">New here? <button type="button" class="linkbtn" data-switch="register">Create an account</button></p>
+        </section>
+
+        <section id="panelRegister" role="tabpanel" aria-labelledby="tabRegister" tabindex="-1" hidden>
+          <h2>Create your account</h2>
+          <form id="registerForm" novalidate>
+            <fieldset class="lockable">
+              <div class="field" data-check="name">
+                <label for="regName">Display name</label>
+                <input type="text" id="regName" autocomplete="nickname" maxlength="40" aria-describedby="regName-hint regName-err" />
+                <p class="field__hint" id="regName-hint">The name we use to greet you. 2 to 40 characters.</p>
+                <p class="field__error" id="regName-err" hidden></p>
+              </div>
+              <div class="field" data-check="email">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" autocomplete="email" aria-describedby="regEmail-err" />
+                <p class="field__error" id="regEmail-err" hidden></p>
+              </div>
+              <div class="field" data-check="newPassword">
+              <label for="regPassword">Password</label>
+              <div class="pw">
+                <input type="password" id="regPassword" autocomplete="new-password" maxlength="72" aria-describedby="regPassword-err regPassword-hint" />
+                <button type="button" class="pw__toggle" aria-controls="regPassword" aria-pressed="false">Show</button>
+              </div>
+              <p class="field__hint" id="regPassword-hint">At least 8 characters.</p>
+              <p class="field__error" id="regPassword-err" hidden></p>
+            </div>
+            </fieldset>
+            <p class="form-message" id="registerMsg" role="alert" hidden></p>
+            <div class="panel__actions">
+              <button type="submit" class="btn btn--dark" id="regSubmit">Create account</button>
+            </div>
+          </form>
+          <p class="auth-switch">Already have an account? <button type="button" class="linkbtn" data-switch="signin">Sign in</button></p>
+        </section>
+      </div>
+
+      <!-- SIGNED IN -->
+      <div id="viewIn" hidden>
+        <h2>Hello, <span id="accName"></span></h2>
+        <p class="form-message form-message--ok" id="accMsg" role="status" hidden></p>
+        <dl class="account-details">
+          <div><dt>Email</dt><dd id="accEmail"></dd></div>
+          <div><dt>Account</dt><dd><span class="badge" id="accRole"></span></dd></div>
+        </dl>
+        <p class="muted" id="accRoleNote"></p>
+        <p class="form-message" id="accProfileError" role="alert" hidden>
+          We couldn't load your profile.
+          <button type="button" class="linkbtn" id="retryProfile">Try again</button>
+        </p>
+        <div class="account-links"><a class="btn btn--dark" href="plans.html">My plans</a><a class="btn btn--light" href="timeline.html">My timeline</a></div>
+        <div class="panel__actions">
+          <button type="button" class="btn btn--light" id="signOutBtn">Sign out</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="official">
+        <a class="official__logo" href="https://www.ciup.fr" target="_blank" rel="noopener" aria-label="Cité internationale universitaire de Paris, official website">
+          <img src="images/ciup-logo.png" alt="Cité internationale universitaire de Paris" onerror="this.replaceWith(document.createTextNode('ciup.fr'))" />
+        </a>
+        <p class="official__text"><strong>MANI</strong> Independent student project</p>
+      </div>
+      <p class="footer__disclaimer">Independent student project, not affiliated with the Cité internationale universitaire de Paris. Always check <a href="https://www.ciup.fr" target="_blank" rel="noopener">ciup.fr</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Supabase browser library (pinned version, integrity-checked), then our config + account code.
+       Only this page loads it. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+  <script src="account.js"></script>
+</body>
+</html>

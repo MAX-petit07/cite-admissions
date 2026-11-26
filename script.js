@@ -1,8 +1,14 @@
 // MANI — app-style homepage: a sidebar and one step at a time.
 // Plain JavaScript, no libraries. All text is set with textContent (never innerHTML).
 
-// ===== Top bar (both pages): phone menu, and on the homepage it turns solid when you scroll past the photo =====
+// ===== Top bar (every page): phone menu, and on the homepage it turns solid when you scroll past the photo =====
 (function () {
+  // "Sign up" becomes "My account" when a saved login exists (we only look at the browser's storage here, no request is made)
+  try {
+    const signed = Object.keys(localStorage).some((k) => /^sb-.+-auth-token$/.test(k));
+    const link = document.querySelector("[data-auth-link]");
+    if (signed && link) link.textContent = "My account";
+  } catch (e) { /* storage blocked */ }
   const bar = document.getElementById("topbar");
   const btn = document.getElementById("menuBtn");
   const nav = document.getElementById("topnav");
@@ -288,6 +294,16 @@
     })(t0);
   }
 
+  // ---------- Plan A from the quiz ----------
+  const planNote = $("#planANote");
+  if (planNote) {
+    const plan = store.get("maniPlanA", null);
+    if (plan && typeof plan.name === "string") {
+      $("span", planNote).textContent = plan.name + " (from your quiz answers). This is guidance, not an admission decision.";
+      planNote.hidden = false;
+    }
+  }
+
   // ---------- opening the page ----------
   const fromHash = viewFromHash(location.hash);
   let first;
@@ -301,17 +317,6 @@
   if (first.length === 1) lastStep = first;
   render();
   if (isReturning() && first.length === 1) showWelcomeBack(first);
-  // The big button in the photo hero: "Continue: Step X" for people who already started
-  const heroCta = $("#heroCta");
-  if (heroCta && isReturning()) {
-    const step = first.length === 1 ? first : lastStep;
-    heroCta.textContent = "Continue: Step " + step + " ";
-    const arrow = document.createElement("span");
-    arrow.setAttribute("aria-hidden", "true");
-    arrow.textContent = "→";
-    heroCta.appendChild(arrow);
-    heroCta.setAttribute("href", "#" + CANON[step]);
-  }
   window.addEventListener("load", moveGlide); // fonts can change the row heights
   window.addEventListener("resize", moveGlide);
 })();

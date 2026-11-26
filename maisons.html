@@ -8,14 +8,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="pages.css" />
 </head>
 <body>
 
-  <!-- ============ TOP BAR (same as the homepage, solid) ============ -->
   <header class="topbar" id="topbar">
     <div class="container topbar__inner">
-      <a href="index.html#top" class="logo" aria-label="MANI, back to the top">
-        <!-- Simple placeholder icon (not the official CIUP logo) -->
+      <a href="index.html" class="logo" aria-label="MANI, home">
         <svg class="logo__icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 44V22C8 13 15 6 24 6s16 7 16 16v22" />
           <path d="M16 44V24c0-5 3.5-9 8-9s8 4 8 9v20" />
@@ -27,9 +26,10 @@
       <div class="topbar__right">
         <nav class="topnav" id="topnav" aria-label="Main">
           <a href="maisons.html" class="topnav__link is-active" aria-current="page">Houses</a>
-          <a href="index.html#faq" class="topnav__link">FAQ</a>
+          <a href="timeline.html#who-can-apply" class="topnav__link">Eligibility</a>
+          <a href="timeline.html" class="topnav__link">Timeline</a>
         </nav>
-        <a href="index.html#who-can-apply" class="btn btn--mint btn--sm topbar__start">Start</a>
+        <a href="account.html" class="btn btn--mint btn--sm topbar__start" data-auth-link>Sign up</a>
         <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="topnav">☰</button>
       </div>
     </div>
@@ -38,7 +38,7 @@
   <!-- ============ PAGE TITLE BANNER ============ -->
   <section class="hero hero--small">
     <div class="container hero__content">
-      <a class="back-link" href="index.html">← Back to my application</a>
+      <a class="back-link" href="timeline.html">← Back to my timeline</a>
       <h1>Explore the Maisons (houses)</h1>
       <p>All the houses listed on the official CIUP website.</p>
     </div>
@@ -263,14 +263,13 @@
   <!-- ============ FOOTER (same as homepage) ============ -->
   <footer class="footer">
     <div class="container footer__inner">
-      <!-- Official information area: the logo file goes in images/ciup-logo.png -->
       <div class="official">
         <a class="official__logo" href="https://www.ciup.fr" target="_blank" rel="noopener" aria-label="Cité internationale universitaire de Paris, official website">
           <img src="images/ciup-logo.png" alt="Cité internationale universitaire de Paris" onerror="this.replaceWith(document.createTextNode('ciup.fr'))" />
         </a>
-        <p class="official__text"><strong>Official information:</strong> Cité internationale universitaire de Paris</p>
+        <p class="official__text"><strong>MANI</strong> Independent student project</p>
       </div>
-      <p class="footer__disclaimer">MANI is an independent student project and is not affiliated with the Cité Internationale Universitaire de Paris. Always check the <a href="https://www.ciup.fr" target="_blank" rel="noopener">official CIUP website</a>.</p>
+      <p class="footer__disclaimer">Independent student project, not affiliated with the Cité internationale universitaire de Paris. Always check <a href="https://www.ciup.fr" target="_blank" rel="noopener">ciup.fr</a>.</p>
     </div>
   </footer>
 
