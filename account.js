@@ -93,7 +93,7 @@
       if (!v) return "Please enter a display name.";
       if (v.length < 2) return "Your display name needs at least 2 characters.";
       if (v.length > 40) return "Your display name can have 40 characters at most.";
-      if (Auth.isReservedName(v)) return "That name isn't allowed because it could be mistaken for the MANI team or CIUP. Please choose another one.";
+      if (Auth.isReservedName(v)) return "That name isn't allowed because it could be mistaken for the Jourdan team or CIUP. Please choose another one.";
       return "";
     },
     email: function (v) {
@@ -296,7 +296,7 @@
   // ---------- Signed-in view ----------
   var ROLE_NOTES = {
     student: "You have a student account.",
-    team: "You are a member of the MANI Team.",
+    team: "You are a member of the Jourdan Team.",
   };
 
   function renderSignedIn(s) {

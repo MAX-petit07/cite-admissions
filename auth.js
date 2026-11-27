@@ -71,20 +71,20 @@
   // Everything here comes from the database row (public.profiles), never from the browser.
   function roleInfo(profile) {
     if (!profile) return { key: "unknown", label: "" };
-    if (profile.role === "team") return { key: "team", label: "MANI Team" };
+    if (profile.role === "team") return { key: "team", label: "Jourdan Team" };
     if (profile.role === "student") return { key: "student", label: "Student" };
     return { key: "student", label: "Member" };
   }
   function roleLabel(profile) { return roleInfo(profile).label; }
 
-  // Names that could be mistaken for the MANI team, CIUP or a moderator.
+  // Names that could be mistaken for the Jourdan team, CIUP or a moderator.
   // Used when registering (blocks them) and when showing names (hides them for non-team people).
   // Must stay in sync with public.is_reserved_name() in the database.
-  var RESERVED_NAME = /\b(ciup|moderators?|admin(istrators?)?|staff|official)\b|\bmani\b.*\b(team|admin|staff|official|moderator)\b|\b(team|admin|staff|official|moderator)\b.*\bmani\b|\badmissions?\s+team\b/i;
+  var RESERVED_NAME = /\b(ciup|moderators?|admin(istrators?)?|staff|official)\b|\b(mani|jourdan)\b.*\b(team|admin|staff|official|moderator)\b|\b(team|admin|staff|official|moderator)\b.*\b(mani|jourdan)\b|\badmissions?\s+team\b/i;
   function isReservedName(name) {
     var plain = String(name || "")
       .replace(/[\u200B-\u200D\uFEFF]/g, "")   // invisible characters
-      .replace(/[_.\-·•|]+/g, " ");            // "MANI_Team" -> "MANI Team"
+      .replace(/[_.\-·•|]+/g, " ");            // "Jourdan_Team" -> "Jourdan Team"
     return RESERVED_NAME.test(plain);
   }
 

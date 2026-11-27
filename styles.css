@@ -1,5 +1,5 @@
 /* =====================================================
-   MANI — "Midnight and mint" palette
+   Jourdan — "Midnight and mint" palette
    All colours are defined HERE, once. Everywhere else we
    use var(--name), never a hard-coded colour.
    ===================================================== */
@@ -112,11 +112,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ===== Top bar (midnight): logo, Houses, FAQ ===== */
 .topbar { background: var(--midnight); position: sticky; top: 0; z-index: 20; }
 .topbar__inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 16px; }
-.logo { display: flex; align-items: center; gap: 12px; min-width: 0; border-radius: 12px; }
-.logo__icon { width: 40px; height: 40px; color: var(--mint); flex-shrink: 0; }
-.logo__text { display: flex; flex-direction: column; line-height: 1.2; }
-.logo__text strong { font-size: 1.25rem; font-weight: 800; color: var(--on-dark); }
-.logo__text small { font-size: .875rem; color: var(--on-dark-muted); }
+.logo { display: flex; align-items: center; gap: 10px; min-width: 0; border-radius: 12px; color: var(--on-dark); }
+.logo__icon { width: 32px; height: 32px; color: var(--on-dark); flex-shrink: 0; overflow: visible; } /* arch follows the text colour: white on dark */
+.logo__j { stroke: var(--mint); stroke-width: 4.5; }
+.logo__text { display: flex; align-items: baseline; line-height: 1; }
+.logo__text strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--on-dark); }
+.logo__dot { font-size: 1.5rem; font-weight: 800; color: var(--mint); letter-spacing: -0.03em; }
+.logo--sm { gap: 8px; }
+.logo--sm .logo__icon { width: 24px; height: 24px; }
+.logo--sm .logo__text strong, .logo--sm .logo__dot { font-size: 1.125rem; }
+.footbrand p { margin-top: 8px; font-size: .9rem; color: var(--on-dark-muted); }
 .topbar__right { display: flex; align-items: center; gap: 8px; }
 .topnav { display: flex; gap: 8px; }
 .topnav__link { white-space: nowrap; font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--on-dark); padding: 8px 16px; min-height: 44px; display: inline-flex; align-items: center; border-radius: var(--pill); transition: background .15s; }
@@ -208,6 +213,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 @media (max-width: 400px) {
   .logo { gap: 8px; }
-  .logo__text strong { font-size: 1.05rem; }
+  .logo__icon { width: 28px; height: 28px; }
+  .logo__text strong, .logo__dot { font-size: 1.3rem; }
   .topbar__right { gap: 4px; }
 }

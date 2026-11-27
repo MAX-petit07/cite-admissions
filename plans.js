@@ -1,4 +1,4 @@
-// MANI — Plan A, B and C from the quiz answers.
+// Jourdan — Plan A, B and C from the quiz answers.
 // Honest matching: it only uses what is verified in journey-data.js (official ciup.fr pages, checked 24 Nov 2026).
 // Anything we have no data for is shown as "not verified yet" or "we can't match this yet", never guessed.
 // All text is set with textContent (never innerHTML).

@@ -1,4 +1,4 @@
-// MANI — app-style homepage: a sidebar and one step at a time.
+// Jourdan — app-style homepage: a sidebar and one step at a time.
 // Plain JavaScript, no libraries. All text is set with textContent (never innerHTML).
 
 // ===== Top bar (every page): phone menu, and on the homepage it turns solid when you scroll past the photo =====

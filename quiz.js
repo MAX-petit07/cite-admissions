@@ -1,4 +1,4 @@
-// MANI — the quiz: 6 questions, one per screen. Answers are saved in this browser (localStorage).
+// Jourdan — the quiz: 6 questions, one per screen. Answers are saved in this browser (localStorage).
 // All text is set with textContent (never innerHTML).
 (function () {
   "use strict";

@@ -1,4 +1,4 @@
-# CIUP — Verified information for Cité Admissions
+# CIUP — Verified information for Jourdan
 
 Collected from the official website www.ciup.fr on **10 November 2026**.
 Only facts stated on official CIUP pages are included. Anything not found is listed under "Not found on the official site". Re-check before the final presentation, because the site can change.
